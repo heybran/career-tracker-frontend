@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Jobs Tracker 
 
 A jobs tracker application built with vanilla `Web Components` as frontend and `Node.js` as backend.
@@ -17,3 +18,6 @@ This is a refactoring of another project of mine (private repo) which is built w
 
 
 mkcert -key-file key.pem -cert-file cert.pem localhost
+=======
+# career-tracker-frontend
+>>>>>>> 374489a4ea03084b98e3a0656a38e40a24d3ab3f
