@@ -10,14 +10,6 @@ export default defineConfig({
   build: {
     outDir: "build"
   },
-  // server: {
-  //   proxy: {
-  //     "/api": {
-  //       target: "http://127.0.0.1:57005",
-  //       changeOrigin: true,
-  //     },
-  //   },
-  // },
   server: {
     https: {
       key: 'key.pem',
