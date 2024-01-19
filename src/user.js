@@ -8,14 +8,14 @@ export default class User {
     const submitButton = form.querySelector('[type="submit"]');
     submitButton?.setAttribute('loading', '');
 
-    fetch(window.config.endpoint + '/signin', {
+    fetch(window.config.endpoint + '/users/signin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       credentials: 'include',
       body: JSON.stringify({
-        username: formData.get('username'),
+        email: formData.get('email'),
         password: formData.get('password'),
       })
     })
@@ -51,14 +51,14 @@ export default class User {
     const submitButton = form.querySelector('[type="submit"]');
     submitButton?.setAttribute('loading', '');
 
-    fetch(window.config.endpoint + '/signup', {
+    fetch(window.config.endpoint + '/users/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       credentials: 'include',
       body: JSON.stringify({
-        username: formData.get('username'),
+        email: formData.get('email'),
         password: formData.get('password'),
       })
     })
@@ -66,7 +66,8 @@ export default class User {
       // Handle the response from the server
       if (res.ok) {
         // ROUTER.redirect('/jobs');
-        location.href = "/jobs/add";
+        // location.href = "/jobs/add";
+        ROUTER.redirect("/signin");
       } else {
         const p = document.createElement('p');
         p.style.color = 'red';
@@ -87,7 +88,7 @@ export default class User {
 
   signout(button) {
     button.setAttribute('loading', '');
-    fetch(window.config.endpoint + '/signout', {
+    fetch(window.config.endpoint + '/users/signout', {
       method: 'POST',
       credentials: 'include'
     }).then((res) => {

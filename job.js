@@ -12,7 +12,7 @@ export default class JobController {
     const submitButton = form.querySelector('[type="submit"]');
     submitButton?.setAttribute('loading', '');
 
-    fetch(config.endpoint + '/jobs', {
+    fetch(config.endpoint + '/jobs/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -47,14 +47,15 @@ export default class JobController {
       },
       credentials: 'include',
       body: JSON.stringify({
+        id: Number(new URLSearchParams(location.search).get('id')),
         website: form.querySelector('[name="website"]').value,
         position: form.querySelector('[name="position"]').value,
-        'date-applied': form.querySelector('[name="date-applied"]').value,
+        'date_applied': form.querySelector('[name="date_applied"]').value,
         source: form.querySelector('[name="source"]').value,
         status: form.querySelector('[name="status"]').value,
         notes: form.querySelector('[name="notes"]').value,
-        'apply-channel': form.querySelector('[name="apply-channel"]').value,
-        'volunteer-position': form.querySelector('[name="volunteer-position"]').value,
+        'apply_channel': form.querySelector('[name="apply_channel"]').value,
+        'volunteer_position': form.querySelector('[name="volunteer_position"]').value,
       })
     })
     .then(res => {
@@ -87,8 +88,7 @@ export default class JobController {
       credentials: 'include'
     }).then(res => {
       if (res.ok) {
-        // Remove job under this id
-        document.querySelector('`tr[data-job-id=${id}]`')?.remove();
+        ROUTER.redirect('/jobs');
         trigger.closest('dialog').close();
       }
     }).catch((error) => {

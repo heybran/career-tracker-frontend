@@ -32,8 +32,6 @@ export default class CucumberRouter {
 
     this._routes = routes;
 
-    console.log(this._routes);
-
     /**
      * The previous route that was navigated to
      * @type {import('./types.js').Route}

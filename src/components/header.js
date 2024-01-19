@@ -75,14 +75,11 @@ export default class Header extends HTMLElement {
         ${window.config.user ? `
           <cc-popover-wrapper>
             <cc-button slot="trigger">
-              ${window.config.user}
+              ${window.config.user.email}
               <cc-icon icon="chevron-down" slot="suffix"></cc-icon>
             </cc-button>
             <cc-popover placement="bottom-end">
               <ul>
-                <li>
-                  You're signed in as <b>${window.config.user}</b>
-                </li>
                 <li>
                   <cc-button style="width: 100%" href="/account/change-password">Update password</cc-button>
                 </li>
