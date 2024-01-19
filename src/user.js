@@ -23,7 +23,7 @@ export default class User {
       // Handle the response from the server
       if (res.ok) {
         // ROUTER.redirect('/jobs');
-        location.href = "/jobs/add";
+        // location.href = "/jobs/add";
       } else {
         const p = document.createElement('p');
         p.style.color = 'red';
