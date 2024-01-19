@@ -10,10 +10,6 @@
   },
   "author": "Brandon Zhang",
   "license": "MIT",
-  "dependencies": {
-    "cucumber-router": "file:/Users/brandon/codes/cucumber-router",
-    "cucumber-components": "./cucumber-components-0.1.0.tgz"
-  },
   "devDependencies": {
     "vite": "^4.4.6"
   }
