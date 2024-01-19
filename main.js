@@ -1,14 +1,16 @@
 import "./style.css";
-let endpoint = import.meta.env.DEV ? 'http://127.0.0.1:57005' : 'https://api.careertracker.work';
+let endpoint = 'https://api.careertracker.work/api/v1';
 window.config = { endpoint };
 
-const res = await fetch(window.config.endpoint + '/get-cookie', {
+const res = await fetch(window.config.endpoint + '/users/is-logged-in', {
   credentials: 'include'
 });
 
 if (res.ok) {
-  const { user } = await res.json();
-  window.config.user = user;
+  const { logged_in, user } = await res.json();
+  if (logged_in) {
+    window.config.user = user;
+  }
 }
 
 import "./src/components/header.js";
@@ -18,6 +20,7 @@ import "cucumber-components/dist/components/side-nav-item/side-nav-item.js";
 import "cucumber-components/dist/components/icon/icon.js";
 import "cucumber-components/dist/components/form-layout/form-layout.js";
 import "cucumber-components/dist/components/text-field/text-field.js";
+import "cucumber-components/dist/components/email-field/email-field.js";
 import "cucumber-components/dist/components/date-picker/date-picker.js";
 import "cucumber-components/dist/components/option/option.js";
 import "cucumber-components/dist/components/select/select.js";
@@ -84,7 +87,9 @@ const ROUTER = new CucumberRouter(outlet, [
       let id = search.get("id");
       const form = document.forms['edit-job-form'];
       const layout = form.querySelector('cc-form-layout');
-      fetch(`${config.endpoint}/jobs/${id}`).then(res => res.json()).then(job => {
+      fetch(`${config.endpoint}/jobs/${id}`, {
+        credentials: 'include'
+      }).then(res => res.json()).then(job => {
         renderFormElements(job, layout);
         window.dispatchEvent(new CustomEvent('dataFetched'));
       });
