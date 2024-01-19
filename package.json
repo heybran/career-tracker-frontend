@@ -12,5 +12,8 @@
   "license": "MIT",
   "devDependencies": {
     "vite": "^4.4.6"
+  },
+  "dependencies": {
+    "cucumber-web-components": "^0.1.1"
   }
 }

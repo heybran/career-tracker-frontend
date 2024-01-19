@@ -55,7 +55,7 @@ export default class Header extends HTMLElement {
       <header>
         <a href="/">
           <cc-visually-hidden>Visit Career Tracker Homepage</cc-visually-hidden>
-          <img src="/career-tracker.svg" alt="Career Tracker Logo" role="img">
+          <img src="/public/career-tracker.svg" alt="Career Tracker Logo" role="img">
         </a>
         <cc-side-nav horizontal>
           <cc-side-nav-item path="/jobs/add">
