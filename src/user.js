@@ -16,12 +16,13 @@ export default class User {
       credentials: 'include',
       body: JSON.stringify({
         email: formData.get('email'),
-        password: formData.get('password'),
+        clientURL: location.origin + '/login-via-email',
       })
     })
     .then(async res => {
       // Handle the response from the server
       if (res.ok) {
+        // Show a success modal here about email is sent
       } else {
         const p = document.createElement('p');
         p.style.color = 'red';
@@ -57,15 +58,13 @@ export default class User {
       credentials: 'include',
       body: JSON.stringify({
         email: formData.get('email'),
-        password: formData.get('password'),
+        clientURL: location.origin + '/activate-account',
       })
     })
     .then(res => {
       // Handle the response from the server
       if (res.ok) {
-        // ROUTER.redirect('/jobs');
-        // location.href = "/jobs/add";
-        ROUTER.redirect("/signin");
+        // TODO: show a modal that asking users to check their inbox
       } else {
         const p = document.createElement('p');
         p.style.color = 'red';

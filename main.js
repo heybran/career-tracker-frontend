@@ -106,6 +106,57 @@ import { renderTable, renderFormElements } from "./dom.js";
     {
       path: "/account/change-password",
       template: document.querySelector('[path="/account/change-password"]'),
+    },
+    {
+      path: "/activate-account",
+      template: document.querySelector('[path="/activate-account"]'),    
+      load: async({ search }) => {
+        console.log(search);
+        fetch(`${config.endpoint}/users/activate-account`, {
+          method: 'POST',
+          credentials: 'include',
+          // If header is not set, php won't regonize the email/token is being passed
+          headers: {
+            'Content-Type': 'application/json'
+          },
+
+          body: JSON.stringify({
+            email: decodeURIComponent(search.get('email')),
+            token: search.get('token'),
+          })
+        }).then((res) => {
+          if (res.ok) {
+            location.href = "/jobs/add";
+          }
+        }).catch(err => {
+          console.error(err);
+        })
+      }
+    },
+    {
+      path: "/login-via-email",
+      template: document.querySelector('[path="/login-via-email"]'),    
+      load: async({ search }) => {
+        fetch(`${config.endpoint}/users/login-via-email`, {
+          method: 'POST',
+          credentials: 'include',
+          // If header is not set, php won't regonize the email/token is being passed
+          headers: {
+            'Content-Type': 'application/json'
+          },
+
+          body: JSON.stringify({
+            email: decodeURIComponent(search.get('email')),
+            token: search.get('token'),
+          })
+        }).then((res) => {
+          if (res.ok) {
+            location.href = "/jobs/add";
+          }
+        }).catch(err => {
+          console.error(err);
+        })
+      }
     }
   ]);
 

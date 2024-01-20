@@ -2,12 +2,7 @@ export default class JobController {
   add(event) {
     event.preventDefault();
     const form = event.target;
-    const formData = new FormData(form);
-    const formDataObject = {};
-  
-    for (let [key, value] of formData.entries()) {
-      formDataObject[key] = value;
-    }
+    const formData = new FormData(form);  
 
     const submitButton = form.querySelector('[type="submit"]');
     submitButton?.setAttribute('loading', '');
@@ -18,7 +13,7 @@ export default class JobController {
         'Content-Type': 'application/json'
       },
       credentials: 'include',
-      body: JSON.stringify(formDataObject)
+      body: JSON.stringify(Object.fromEntries(formData))
     })
     .then(res => {
       // Handle the response from the server
@@ -48,14 +43,7 @@ export default class JobController {
       credentials: 'include',
       body: JSON.stringify({
         id: Number(new URLSearchParams(location.search).get('id')),
-        website: form.querySelector('[name="website"]').value,
-        position: form.querySelector('[name="position"]').value,
-        'date_applied': form.querySelector('[name="date_applied"]').value,
-        source: form.querySelector('[name="source"]').value,
-        status: form.querySelector('[name="status"]').value,
-        notes: form.querySelector('[name="notes"]').value,
-        'apply_channel': form.querySelector('[name="apply_channel"]').value,
-        'volunteer_position': form.querySelector('[name="volunteer_position"]').value,
+        ...Object.fromEntries(new FormData(event.form)),
       })
     })
     .then(res => {
