@@ -88,8 +88,6 @@
       </main>
     </template>
     <template path="/jobs/add" protected-route redirect="/signin">
-      <cc-header></cc-header>
-      <main>
         <article class="medium-content">
           <div>
             <h1>Add A New Job</h1>
@@ -117,38 +115,31 @@
             </cc-form-layout>
           </form>
         </article>
-      </main>
-      <cc-footer></cc-footer>
     </template>
     <template path="/jobs" protected-route>
-      <cc-header></cc-header>
-      <main>
-        <article>
-          <table>
-            <thead>
-              <tr>
-                <th>Website</th>
-                <th>Position</th>
-                <th>Source</th>
-                <th>Date Applied</th>
-                <th>Apply Channel</th>
-                <th>Status</th>
-                <th>Volunteer Position</th>
-                <th>Notes</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody render-target>
-            </tbody>
-          </table>
-        </article>
-      </main>
-      <cc-footer></cc-footer>
+      <article>
+        <table>
+          <thead>
+            <tr>
+              <th>Website</th>
+              <th>Position</th>
+              <th>Source</th>
+              <th>Date Applied</th>
+              <th>Apply Channel</th>
+              <th>Status</th>
+              <th>Volunteer Position</th>
+              <th>Notes</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody render-target>
+          </tbody>
+        </table>
+      </article>
       <cc-dialog label="Delete Job" id="delete-job-dialog">
       </cc-dialog>
     </template>
     <template path="/jobs/edit" protected-route>
-      <cc-header></cc-header>
       <main>
         <article class="medium-content">
           <div>
@@ -164,10 +155,8 @@
           </form>
         </article>
       </main>
-      <cc-footer></cc-footer>
     </template>
     <template path="/account/change-password" protected-route>
-      <cc-header></cc-header>
       <main>
         <article class="narrow-content">
           <div>
@@ -184,10 +173,8 @@
           </form>
         </article>
       </main>
-      <cc-footer></cc-footer>
     </template>
     <template path="/activate-account" protected-route>
-      <cc-header></cc-header>
       <main>
         <article class="narrow-content">
           <div>
@@ -195,20 +182,19 @@
           </div>
         </article>
       </main>
-      <cc-footer></cc-footer>
     </template>
     <template path="/login-via-email" protected-route>
-      <cc-header></cc-header>
-      <main>
         <article class="narrow-content">
           <div>
             <h1>Login in your account</h1>
           </div>
         </article>
-      </main>
-      <cc-footer></cc-footer>
     </template>
-    <div id="app" router-outlet router-spinner="spinner"></div>
+    <div>
+      <cc-header></cc-header>
+        <main id="app" router-outlet router-spinner="spinner"></main>
+      <cc-footer></cc-footer>
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>

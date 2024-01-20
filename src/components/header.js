@@ -72,7 +72,7 @@ export default class Header extends HTMLElement {
             }
           </style>
         </cc-side-nav>
-        ${window.config.user ? `
+        ${window.config?.user ? `
           <cc-popover-wrapper>
             <cc-button slot="trigger">
               ${window.config.user.email}

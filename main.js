@@ -1,4 +1,4 @@
-import "./src/components/header.js";
+// @ts-check
 import "./src/components/footer.js";
 import "cucumber-web-components/dist/side-nav";
 import "cucumber-web-components/dist/side-nav-item";
@@ -39,6 +39,7 @@ import { renderTable, renderFormElements } from "./dom.js";
     const { logged_in, user } = await res.json();
     if (logged_in) {
       window.config.user = user;
+      import("./src/components/header.js");
     }
   }
 
@@ -49,14 +50,12 @@ import { renderTable, renderFormElements } from "./dom.js";
   const ROUTER = new CucumberRouter(outlet, [
     {
       path: "/",
-      template: document.querySelector('[path="/"]'),
-      redirect: window.config.user && {
+      redirect: window.config?.user && {
         path: '/jobs/add'
       }
     },
     {
       path: '/jobs',
-      template: document.querySelector('[path="/jobs"]'),
       load: async ({ route, params }) => {
         fetch(window.config.endpoint + '/jobs', {
           credentials: 'include'
@@ -78,11 +77,9 @@ import { renderTable, renderFormElements } from "./dom.js";
     },
     {
       path: '/jobs/add',
-      template: document.querySelector('[path="/jobs/add"]'),
     },
     {
       path: '/jobs/edit',
-      template: document.querySelector('[path="/jobs/edit"]'),
       load: async ({ route, params, search }) => {
         let id = search.get("id");
         const form = document.forms['edit-job-form'];
@@ -97,22 +94,17 @@ import { renderTable, renderFormElements } from "./dom.js";
     },
     {
       path: "/signin",
-      template: document.querySelector('[path="/signin"]'),
     },
     {
       path: "/signup",
-      template: document.querySelector('[path="/signup"]'),
     },
     {
       path: "/account/change-password",
-      template: document.querySelector('[path="/account/change-password"]'),
     },
     {
-      path: "/activate-account",
-      template: document.querySelector('[path="/activate-account"]'),    
-      load: async({ search }) => {
-        console.log(search);
-        fetch(`${config.endpoint}/users/activate-account`, {
+      path: "/activate-account",  
+      load: async({ route, search }) => {
+        fetch(`${config.endpoint}/users/${route.path.split('/').at(-1)}`, {
           method: 'POST',
           credentials: 'include',
           // If header is not set, php won't regonize the email/token is being passed
@@ -135,9 +127,8 @@ import { renderTable, renderFormElements } from "./dom.js";
     },
     {
       path: "/login-via-email",
-      template: document.querySelector('[path="/login-via-email"]'),    
-      load: async({ search }) => {
-        fetch(`${config.endpoint}/users/login-via-email`, {
+      load: async({ route, search }) => {
+        fetch(`${config.endpoint}/users/${route.path.split('/').at(-1)}`, {
           method: 'POST',
           credentials: 'include',
           // If header is not set, php won't regonize the email/token is being passed
@@ -160,42 +151,6 @@ import { renderTable, renderFormElements } from "./dom.js";
     }
   ]);
 
-  // ROUTER.addProtectedRouteGuard(async () => {
-  //   /**
-  //    * By default, when making a fetch request from the client-side JavaScript code, 
-  //    * cookies are not automatically sent along with the request. 
-  //    * However, you can include the `credentials` option with the value `'include'` 
-  //    * to ensure that cookies are sent along with the request.
-  //    */
-  //   const res = await fetch(window.config.endpoint + '/get-cookie', {
-  //     credentials: 'include'
-  //   });
-  //   if (res.ok) {
-  //     window.isUserLoggedin = true;
-  //     // return true;
-  //   }
-  //   // return false;
-  //   // const data = await res.json();
-  //   // return data.isLoggedin;
-  // }, () => {
-  //   const template = document.createElement('template');
-  //   template.innerHTML = `
-  //     <cc-dialog label="You need to signin">
-  //       Click ok will redirect you to home page to signin.
-  //       <cc-button 
-  //         theme="primary" 
-  //         onclick="this.parentElement.close();"
-  //         href="/signin"
-  //         slot="footer-actions-right"
-  //         style="width: 5em;"
-  //       >Ok</cc-button>
-  //     </cc-dialog>
-  //   `;
-  //   const dialog = template.content.cloneNode(true);
-  //   document.body.appendChild(dialog);
-  //   document.body.lastElementChild.show();
-  // });
   window.ROUTER = ROUTER;
-
   ROUTER.start();
 })();
