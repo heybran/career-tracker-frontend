@@ -18,18 +18,6 @@ export default class CucumberRouter {
    */
   constructor(outlet, routes) {
     this.outlet = outlet;
-    /**
-     * Object containing all registered routes.
-     * @type {import('./types.js').Route}
-     * @private
-     */
-    // this._routes = Array.from(document.querySelectorAll('body > template[path]')).map(template => {
-    //   return {
-    //     path: template.getAttribute('path'),
-    //     template,
-    //   }
-    // });
-
     this._routes = routes;
 
     /**
@@ -39,17 +27,11 @@ export default class CucumberRouter {
      */
     this._previousRoute = {};
 
+    this._currentRoute = {};
+
     // Bind event listeners
     window.addEventListener("popstate", this._onChanged.bind(this));
     document.body.addEventListener("click", this._handleClick.bind(this));
-  }
-
-
-  addProtectedRouteGuard(authCheck, callback) {
-    this._protectedRouteGuard = {
-      authCheck,
-      callback,
-    };    
   }
 
   /**
@@ -90,7 +72,7 @@ export default class CucumberRouter {
 
     
     // Render template content into router outlet
-    const template = route.template;
+    const template = document.querySelector(`[path="${route.path}`);
 
     // if (template.hasAttribute('protected-route') && this._protectedRouteGuard) {
     //   const valid = await this._protectedRouteGuard.authCheck();
@@ -113,6 +95,7 @@ export default class CucumberRouter {
     const spinner = document.querySelector(`template#${spinnerID}`).content.firstElementChild.cloneNode(true);
     document.body.appendChild(spinner);
 
+    this._currentRoute = route;
     this.outlet.replaceChildren(template.content.cloneNode(true));
     
     if (isFunction(route.load)) {
