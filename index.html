@@ -140,21 +140,19 @@
       </cc-dialog>
     </template>
     <template path="/jobs/edit" protected-route>
-      <main>
-        <article class="medium-content">
-          <div>
-            <h1>Edit job</h1>
-            <p></p>
-          </div>
-          <form method="post" onsubmit="window.jobController.update(event, this);" id="edit-job-form">
-            <cc-form-layout></cc-form-layout>
-            <cc-horizontal-layout style="margin-block-start: 1rem;">
-              <cc-button style="width: 100%" theme="neutral" href="/jobs">Cancel</cc-button>
-              <cc-button theme="primary" type="submit" style="width: 100%">Confirm</cc-button>
-            </cc-horizontal-layout>
-          </form>
-        </article>
-      </main>
+      <article>
+        <div>
+          <h1>Edit job</h1>
+          <p></p>
+        </div>
+        <form method="post" onsubmit="window.jobController.update(event, this);" id="edit-job-form">
+          <cc-form-layout></cc-form-layout>
+          <cc-horizontal-layout style="margin-block-start: 1rem;">
+            <cc-button style="width: 100%" theme="neutral" href="/jobs">Cancel</cc-button>
+            <cc-button theme="primary" type="submit" style="width: 100%">Confirm</cc-button>
+          </cc-horizontal-layout>
+        </form>
+      </article>
     </template>
     <template path="/account/change-password" protected-route>
       <main>

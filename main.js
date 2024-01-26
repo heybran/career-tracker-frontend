@@ -57,22 +57,30 @@ import { renderTable, renderFormElements } from "./dom.js";
     {
       path: '/jobs',
       load: async ({ route, params }) => {
-        fetch(window.config.endpoint + '/jobs', {
-          credentials: 'include'
-        }).then((res) => res.json()).then((jobs) => {
-          const container = document.querySelector('tbody[render-target]');
-          if (jobs.length) {
-            container.innerHTML = renderTable(jobs);
-          } else {
-            const t = document.createElement('template');
-            t.innerHTML = `
-              <h1>No jobs added yet.</h1>
-              <cc-button theme="primary" href="/jobs/add">Add a job</cc-button>
-            `;
-            container?.closest('table')?.replaceWith(t.content.cloneNode(true));
-          }
-          window.dispatchEvent(new CustomEvent('dataFetched'));
-        });
+        let jobs;
+        if (window.config?.jobs && !route.expired) {
+          jobs = window.config.jobs
+        } else {
+          const res = await fetch(window.config.endpoint + '/jobs', { credentials: 'include' });
+          jobs = await res.json();
+          window.config.jobs = jobs;
+        }
+
+        const container = document.querySelector('tbody[render-target]');
+        if (jobs.length) {
+          container.innerHTML = renderTable(jobs);
+        } else {
+          const t = document.createElement('template');
+          t.innerHTML = `
+            <h1>No jobs added yet.</h1>
+            <cc-button theme="primary" href="/jobs/add">Add a job</cc-button>
+          `;
+          container?.closest('table')?.replaceWith(t.content.cloneNode(true));
+        }
+        window.dispatchEvent(new CustomEvent('dataFetched'));
+      },
+      onExit: ({ route }) => {
+        
       }
     },
     {
@@ -84,12 +92,9 @@ import { renderTable, renderFormElements } from "./dom.js";
         let id = search.get("id");
         const form = document.forms['edit-job-form'];
         const layout = form.querySelector('cc-form-layout');
-        fetch(`${config.endpoint}/jobs/${id}`, {
-          credentials: 'include'
-        }).then(res => res.json()).then(job => {
-          renderFormElements(job, layout);
-          window.dispatchEvent(new CustomEvent('dataFetched'));
-        });
+        const job = window.config.jobs.find(job => job.id === id);
+        renderFormElements(job, layout);
+        window.dispatchEvent(new CustomEvent('dataFetched'));
       }
     },
     {

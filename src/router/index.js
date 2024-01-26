@@ -29,6 +29,8 @@ export default class CucumberRouter {
 
     this._currentRoute = {};
 
+    this._routesVisited = [];
+
     // Bind event listeners
     window.addEventListener("popstate", this._onChanged.bind(this));
     document.body.addEventListener("click", this._handleClick.bind(this));
@@ -62,6 +64,7 @@ export default class CucumberRouter {
   }
 
   async _onChanged() {
+    this._previousRoute = this._currentRoute;
     const path = window.location.pathname;
     const { route, params, search } = this._matchUrlToRoute(path);
 
@@ -95,7 +98,12 @@ export default class CucumberRouter {
     const spinner = document.querySelector(`template#${spinnerID}`).content.firstElementChild.cloneNode(true);
     document.body.appendChild(spinner);
 
+    if (this._previousRoute && this._previousRoute.onExit) {
+      this._previousRoute.onExit({ route, params, search });
+    }
+
     this._currentRoute = route;
+    this._routesVisited.push(this._currentRoute);
     this.outlet.replaceChildren(template.content.cloneNode(true));
     
     if (isFunction(route.load)) {

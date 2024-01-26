@@ -66,17 +66,22 @@ table {
 }
 
 tr > td {
+  vertical-align: middle;
   border-top: 1px solid #e6e6e6;
   padding-block: 0.5rem;
 }
 
-tr > td:nth-child(6) {
+tr > td:not(:last-child) {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 10em;
 }
 
 tr > th {
   padding-block: 0.5rem;
+}
+
+tr {
+  display: grid;
+  grid-template-columns: calc(30ch + 2vw) 20ch 10ch 10ch 10ch 10ch 10ch 10ch 1fr;
 }

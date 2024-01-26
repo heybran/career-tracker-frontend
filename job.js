@@ -17,6 +17,7 @@ export default class JobController {
     })
     .then(res => {
       // Handle the response from the server
+      ROUTER._routes.find(r => r.path === '/jobs').expired = true;
       if (res.ok) {
         ROUTER.redirect('/jobs');
       }

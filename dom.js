@@ -2,7 +2,7 @@ export function renderTable(jobs) {
   let html = '';
   jobs.forEach(job => {
     html += `
-      <tr data-job-id="${job.ID}">
+      <tr data-job-id="${job.id}">
         <td>${decodeURIComponent(job.website)}</td>
         <td>${job.position}</td>
         <td>${job.source ?? ''}</td>
