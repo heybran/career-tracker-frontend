@@ -29,6 +29,7 @@ export default class Header extends HTMLElement {
           text-decoration: none;
           color: inherit;
           width: 12em;
+          min-width: 120px;
         }
         img {
           width: 100%;
@@ -51,13 +52,49 @@ export default class Header extends HTMLElement {
         li + li {
           margin-top: .5rem;
         }
+        cc-button#open-nav {
+          display: none;
+        }
+        cc-side-nav-item[onclick] {
+          display: none;
+        }
+        @media (max-width: 800px) {
+          cc-side-nav {
+            position: fixed;
+            left: 0;
+            background: white;
+            padding: 1rem;
+            bottom: 0;
+            top: 0;
+            border-right: 1px solid #eee;
+            transform: translateX(-100%);
+            transition: 0.3s;
+          }
+          cc-side-nav-item[onclick] {
+            display: initial;
+          }
+          header.nav-opened cc-side-nav {
+            transform: translateX(0);
+          }
+          cc-side-nav::part(children) {
+            flex-direction: column;
+          }
+          cc-button#open-nav {
+            display: initial;
+          }
+        }
       </style>
       <header>
         <a href="/">
           <cc-visually-hidden>Visit Career Tracker Homepage</cc-visually-hidden>
           <img src="/career-tracker.svg" alt="Career Tracker Logo" role="img">
         </a>
+        <cc-button id="open-nav" onclick="this.parentElement.classList.add('nav-opened')">Menu</cc-button>
         <cc-side-nav horizontal>
+          <cc-side-nav-item onclick="this.closest('header').classList.remove('nav-opened')">
+            <cc-icon icon="cross" slot="prefix"></cc-icon>
+            Close menu
+          </cc-side-nav-item>
           <cc-side-nav-item path="/jobs/add">
             <cc-icon icon="plus-lg" slot="prefix"></cc-icon>
             Add a Job
