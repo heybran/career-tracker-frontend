@@ -85,7 +85,7 @@ tr > th {
 
 tr {
   display: grid;
-  grid-template-columns: calc(30ch + 2vw) 20ch 10ch 10ch 10ch 10ch 10ch 10ch 1fr;
+  grid-template-columns: calc(30ch + 2vw) 20ch 10ch 10ch 10ch 10ch 10ch 10ch 10ch 1fr;
 }
 
 .logo {

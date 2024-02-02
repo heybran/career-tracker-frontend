@@ -69,8 +69,15 @@ export default class User {
         const p = document.createElement('p');
         p.style.color = 'red';
         p.className = 'error';
-        if (res.status === 409) {
-          p.textContent = 'Username already exists.';
+        if (res.status === 400) {
+          const modal = document.createElement('cc-dialog');
+          modal.setAttribute('label', 'User already exists with this email address.');
+          modal.innerHTML = `
+            <p>There is an user account under this email address already. Redirect you to signin form?</p>
+            <cc-button slot="footer-actions-right" theme="primary" onclick="ROUTER.redirect('/signin'); this.parentElement.close()">Ok</cc-button>
+          `;
+          document.body.appendChild(modal);
+          customElements.whenDefined('cc-dialog').then(() => modal.show())
         }
         // p.textContent = 'Incorrect username or password.';
         form.appendChild(p);

@@ -10,6 +10,7 @@ export function renderTable(jobs) {
         <td>${job.apply_channel}</td>
         <td><cc-badge theme="primary">${job.status}</cc-badge></td>
         <td>${Number(job.volunteer_position) !== 0 ? `<cc-badge theme="success">Yes</cc-badge>` : ''}</td>
+        <td>${Number(job.four_day_week) !== 0 ? `<cc-badge theme="success">Yes</cc-badge>` : '<cc-badge theme="neutral">No</cc-badge>'}</td>
         <td>${job.notes}</td>
         <td>
           <cc-button theme="primary" href="/jobs/edit?id=${job.id}">Edit</cc-button>
@@ -40,6 +41,7 @@ export function renderFormElements(job, layout) {
       <cc-radio label="LinkedIn" value="linkedin" ${job.apply_channel === 'linkedin' ? 'checked' : ''}></cc-radio>
     </cc-radio-group>
     <cc-checkbox name="volunteer_position" label="Volunteer position" ${Number(job.volunteer_position) !== 0 ? 'checked' : ''}></cc-checkbox>
+    <cc-checkbox name="four_day_week" label="4 day week" ${Number(job.four_day_week) !== 0 ? 'checked' : ''}></cc-checkbox>
   `;
 
   layout.querySelector('cc-textarea').value = job.notes;
