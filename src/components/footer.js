@@ -13,6 +13,7 @@ export default class Footer extends HTMLElement {
           align-items: center;
           justify-content: center;
           gap: .5rem;
+          padding: 1rem;
         }
         a {
           color: inherit;
@@ -22,8 +23,8 @@ export default class Footer extends HTMLElement {
         }
       </style>
       <footer>
-        <p>Crafted by <a href="https://github.com/heybran">@heybran.</a></p>
-        <p>Logo icon is downloaded from <a href="https://icons8.com/">Icons8</a>.</p>
+        Crafted by <a href="https://github.com/heybran">@heybran.</a>
+        Logo icon is downloaded from <a href="https://icons8.com/">Icons8</a>.
       </footer>
     `; 
   }

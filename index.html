@@ -26,66 +26,49 @@
       <cc-spinner style="--size: 2em"></cc-spinner>
     </template>
     <template path="/signup">
-      <main>
-        <article class="narrow-content">
-          <a href="/">
-            <img src="/career-tracker.svg" alt="Career Tracker Logo" class="logo">
-            <cc-visually-hidden>Visit Career Tracker homepage</cc-visually-hidden>
-          </a>
-          <h1>Sign up</h1>
-          <p>Sign up for an account to start tracking your job applications.</p>
-          <p>Already have an account? <a href="/signin">Sign in here</a>.</p>
-          <form method="post" onsubmit="window.user.signup(event);" id="signup-form">
-            <cc-email-field label="Email" name="email" required></cc-email-field>
-            <cc-button type="submit" theme="primary" colspan="2" style="width: 100%; margin-top: 1rem;">Sign up</cc-button>
-          </form>
-        </article>
-      </main>
+      <article class="narrow-content signup">
+        <h1>
+          <img src="/career-tracker.svg" alt="Career Tracker Logo" class="logo">
+          <cc-visually-hidden>Career Tracker</cc-visually-hidden>
+        </h1>
+        <form method="post" onsubmit="window.user.signup(event);" id="signup-form">
+          <p>Hi there, welcome! You can signup for an account by entering your email address, a signup link will be sent to your inbox.</p>
+          <cc-email-field label="Email address" name="email" required></cc-email-field>
+          <cc-button type="submit" theme="primary" colspan="2" style="width: 100%; margin-top: 1rem;">Continue</cc-button>
+          <small><p>Already have an account? <a href="/signin">Sign in here</a>.</p></small>
+          <!-- <cc-divider text="Or"></cc-divider>
+          <cc-button style="display: flex;">
+            <img src="/github.svg" width="24" height="24" style="margin-right: 0.5rem;">
+            Continue with Github
+          </cc-button> -->
+        </form>
+      </article>
     </template>
     <template path="/signin">
-      <main>
-        <article class="narrow-content">
-          <a href="/">
-            <img src="/career-tracker.svg" alt="Career Tracker Logo" class="logo">
-            <cc-visually-hidden>Visit Career Tracker homepage</cc-visually-hidden>
-          </a>
-          <h1>Sign in</h1>
-          <p>Enter your email to get a login link.</p>
-          <p>Do not have an account? You can <a href="/signup">sign up here</a>.</p>
-          <form method="post" onsubmit="window.user.signin(event);" id="signin-form">
-            <cc-email-field label="Email" name="email" required></cc-email-field>
-            <cc-button type="submit" theme="primary" colspan="2" style="width: 100%; margin-top: 1rem;">Ok, send me a sign in link</cc-button>
-          </form>
-        </article>
-      </main>
+      <article class="narrow-content signin">
+        <h1>
+          <img src="/career-tracker.svg" alt="Career Tracker Logo" class="logo">
+          <cc-visually-hidden>Career Tracker</cc-visually-hidden>
+        </h1>
+        <form method="post" onsubmit="window.user.signin(event);" id="signin-form">
+          <p>Welcome back! Enter your email which you used to register the account, and a login link will be sent to your inbox.</p>
+          <cc-email-field label="Email address" name="email" required></cc-email-field>
+          <cc-button type="submit" theme="primary" colspan="2" style="width: 100%; margin-top: 1rem;">Ok, send me the link</cc-button>
+          <small><p>Do not have an account? <a href="/signup">Sign up here</a>.</p></small>
+        </form>
+      </article>
     </template>
     <template path="/">
-      <style>
-        article {
-          text-align: center;
-        }
-        h1 {
-          margin-block-end: 0;
-          display: flex;
-          justify-content: center;
-        }
-        cc-horizontal-layout {
-          margin-block-start: 2rem;
-        }
-      </style>
-      <main>
-        <article id="welcome">
-          <h1>
-            <img src="/career-tracker.svg" alt="Career Tracker Logo" class="logo">
-            <cc-visually-hidden>Career Tracker</cc-visually-hidden>
-          </h1>
-          <p>A web app that helps you track the jobs you applied.</p>
-          <cc-horizontal-layout style="justify-content: center;">
-            <cc-button href="/signup" theme="primary">Sign up</cc-button>
-            <cc-button href="/signin" theme="neutral">Sign in</cc-button>
-          </cc-horizontal-layout>
-        </article>
-      </main>
+      <article id="welcome">
+        <h1>
+          <img src="/career-tracker.svg" alt="Career Tracker Logo" class="logo">
+          <cc-visually-hidden>Career Tracker</cc-visually-hidden>
+        </h1>
+        <p>A tiny web app that helps you track the jobs you applied, built with vanilla JavaScript & Web Components on frontend and WordPress & PHP as backend.</p>
+        <cc-horizontal-layout style="justify-content: center;">
+          <cc-button href="/signup" theme="primary" style="width: 20rem;">Get started</cc-button>
+        </cc-horizontal-layout>
+      </article>
     </template>
     <template path="/jobs/add" protected-route redirect="/signin">
         <article class="medium-content">
@@ -188,9 +171,9 @@
           </div>
         </article>
     </template>
-    <div>
-      <cc-header></cc-header>
-        <main id="app" router-outlet router-spinner="spinner"></main>
+    <cc-header></cc-header>
+    <div id="app">
+      <main  router-outlet router-spinner="spinner"></main>
       <cc-footer></cc-footer>
     </div>
     <script type="module" src="/main.js"></script>

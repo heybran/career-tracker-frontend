@@ -22,6 +22,7 @@ import "cucumber-web-components/dist/horizontal-layout";
 import "cucumber-web-components/dist/badge";
 import "cucumber-web-components/dist/popover-wrapper";
 import "cucumber-web-components/dist/popover";
+import "cucumber-web-components/dist/divider";
 import JobController from "./job.js";
 import User from "./src/user.js";
 import CucumberRouter from "./src/router/index.js";

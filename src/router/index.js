@@ -59,7 +59,11 @@ export default class CucumberRouter {
    * @param {string} url
    * @returns {void}
    */
-  redirect(url) {
+  redirect(url, options = {}) {
+    const { expired } = options;
+    if (expired) {
+      this._routes.find(route => route.path === url).expired = true;
+    }
     this.navigateTo(url);
   }
 

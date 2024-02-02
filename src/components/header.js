@@ -19,9 +19,6 @@ export default class Header extends HTMLElement {
           gap: 1rem;
           padding: 1rem 2rem;
           border-bottom: 1px solid #e6e6e6;
-          position: fixed;
-          left: 0;
-          right: 0;
           background-color: #fff;
           z-index: 11;
         }

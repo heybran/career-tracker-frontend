@@ -44,13 +44,14 @@ export default class JobController {
       credentials: 'include',
       body: JSON.stringify({
         id: Number(new URLSearchParams(location.search).get('id')),
-        ...Object.fromEntries(new FormData(event.form)),
+        ...Object.fromEntries(new FormData(event.target)),
       })
     })
     .then(res => {
       // Handle the response from the server
       if (res.ok) {
-        ROUTER.redirect('/jobs');
+        // Setting expired to true to refetch data from server
+        ROUTER.redirect('/jobs', { expired: true });
       }
     })
     .catch(error => {
