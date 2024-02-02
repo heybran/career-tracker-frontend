@@ -13,8 +13,26 @@ export function renderTable(jobs) {
         <td>${Number(job.four_day_week) !== 0 ? `<cc-badge theme="success">Yes</cc-badge>` : '<cc-badge theme="neutral">No</cc-badge>'}</td>
         <td>${job.notes}</td>
         <td>
-          <cc-button theme="primary" href="/jobs/edit?id=${job.id}">Edit</cc-button>
-          <cc-button theme="danger" onclick="window.jobController.showDeleteDialog('${job.id}', '${job.website}')">Delete</cc-button>
+          <cc-popover-wrapper>
+            <cc-button theme="borderless round" slot="trigger">
+              <cc-icon icon="three-dots"></cc-icon>
+              <cc-visually-hidden>More actions</cc-visually-hidden>
+            </cc-button>
+            <cc-popover placement="bottom-end">
+              <style>
+              </style>
+              <div style="padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem; width: 15rem;">
+                <cc-button theme="primary" href="/jobs/edit?id=${job.id}">
+                  <cc-icon icon="pencil-square" slot="prefix"></cc-icon>
+                  Edit
+                </cc-button>
+                <cc-button theme="danger" onclick="window.jobController.showDeleteDialog('${job.id}', '${job.website}')">
+                  <cc-icon icon="trash" slot="prefix"></cc-icon>
+                  Delete
+                </cc-button>
+              </div>
+            </cc-popover>
+          </cc-popover-wrapper>          
         </td>
       </tr>
     `;
