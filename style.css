@@ -99,7 +99,6 @@ article:is(.signup, .signin) {
   height: 100dvh;
   display: grid;
   align-content: center;
-  background-color: #F7F9FA;
 
   & h1 {
     text-align: center;
@@ -107,7 +106,7 @@ article:is(.signup, .signin) {
 
   & form {
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.08), inset 0 0 0 1px #DBE3E7;
-    background-color: white;
+    background-color: #F7F9FA;
     padding: 1.5rem 3rem;
     max-width: 50ch;
     margin-inline: auto;
