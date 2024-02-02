@@ -99,6 +99,7 @@ article:is(.signup, .signin) {
   height: 100dvh;
   display: grid;
   align-content: center;
+  pointer-events: none;
 
   & h1 {
     text-align: center;
@@ -110,6 +111,7 @@ article:is(.signup, .signin) {
     padding: 1.5rem 3rem;
     max-width: 50ch;
     margin-inline: auto;
+    pointer-events: all;
     @media (any-pointer: coarse) {
       background-color: transparent;
       box-shadow: none;
