@@ -14,12 +14,11 @@ body {
   display: grid;
   grid-template-rows: auto 1fr;
   height: 100vh;
-  background-color: #F7F9FA;
 }
 
-#main > article {
-  max-width: 100%;
+article {
   margin-inline: auto;
+  padding: 4rem 2rem;
 }
 
 #main form {
@@ -100,6 +99,7 @@ article:is(.signup, .signin) {
   height: 100dvh;
   display: grid;
   align-content: center;
+  background-color: #F7F9FA;
 
   & h1 {
     text-align: center;
