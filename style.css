@@ -125,7 +125,7 @@ article#welcome {
   display: grid;
   position: fixed;
   inset: 0;
-  height: 100dvh;
+  height: 80dvh;
   place-content: center;
   align-items: center;
   max-width: 50ch;
