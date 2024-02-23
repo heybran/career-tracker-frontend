@@ -23,6 +23,7 @@ import "cucumber-web-components/dist/badge";
 import "cucumber-web-components/dist/popover-wrapper";
 import "cucumber-web-components/dist/popover";
 import "cucumber-web-components/dist/divider";
+import "cucumber-web-components/dist/switch";
 import JobController from "./job.js";
 import User from "./src/user.js";
 import CucumberRouter from "./src/router/index.js";
@@ -105,7 +106,7 @@ import { renderTable, renderFormElements } from "./dom.js";
       path: "/signup",
     },
     {
-      path: "/account/change-password",
+      path: "/account/setting",
     },
     {
       path: "/activate-account",  

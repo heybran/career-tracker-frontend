@@ -94,6 +94,7 @@
                 <cc-radio label="LinkedIn" value="linkedin"></cc-radio>
               </cc-radio-group>
               <cc-checkbox name="volunteer_position" label="Volunteer position"></cc-checkbox>
+              <cc-checkbox name="freelance" label="Freelance"></cc-checkbox>
               <cc-checkbox name="four_day_week" label="4 day week"></cc-checkbox>
               <cc-button type="submit" theme="primary" colspan="2">Submit</cc-button>
             </cc-form-layout>
@@ -112,7 +113,8 @@
               <th>Apply Channel</th>
               <th>Status</th>
               <th>Volunteer Position</th>
-              <th>4 Day Week</th>
+              <th>Freelance</th>
+              <th>4 <br>Day<br> Week</th>
               <th>Notes</th>
               <th>Actions</th>
             </tr>
@@ -139,23 +141,23 @@
         </form>
       </article>
     </template>
-    <template path="/account/change-password" protected-route>
-      <main>
-        <article class="narrow-content">
-          <div>
-            <h1>Change password</h1>
-            <p></p>
-          </div>
-          <form method="post" onsubmit="window.user.updatePassword(event, this);" id="edit-job-form">
-            <cc-password-field label="Old password" name="old-password" required></cc-password-field>
-            <cc-password-field label="New password" name="new-password" required></cc-password-field>
-            <cc-horizontal-layout style="margin-block-start: 1rem;">
-              <cc-button style="width: 100%" theme="neutral" href="/jobs">Cancel</cc-button>
-              <cc-button theme="primary" type="submit" style="width: 100%">Confirm</cc-button>
-            </cc-horizontal-layout>
-          </form>
-        </article>
-      </main>
+    <template path="/account/setting" protected-route>
+      <article class="narrow-content">
+        <div>
+          <h1>Account setting</h1>
+          <p></p>
+        </div>
+        <form method="post" onsubmit="window.user.updatePassword(event, this);" id="edit-job-form">
+          <cc-text-field label="Display name" name="display_name"></cc-text-field>
+          <cc-switch name="password_login_allowed">Allow password login</cc-switch>
+          <cc-password-field label="Old password" name="old-password" required></cc-password-field>
+          <cc-password-field label="New password" name="new-password" required></cc-password-field>
+          <cc-horizontal-layout style="margin-block-start: 1rem;">
+            <cc-button style="width: 100%" theme="neutral" href="/jobs">Cancel</cc-button>
+            <cc-button theme="primary" type="submit" style="width: 100%">Confirm</cc-button>
+          </cc-horizontal-layout>
+        </form>
+      </article>
     </template>
     <template path="/activate-account" protected-route>
       <main>

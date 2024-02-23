@@ -5,6 +5,9 @@
 html {
   scroll-behavior: smooth;
   --primary-color: #0570c5;
+  @media screen and (any-pointer: coarse) {
+    --mobile-inline-padding: 1rem;
+  }
 }
 
 body {
@@ -18,7 +21,7 @@ body {
 
 article {
   margin-inline: auto;
-  padding: 4rem 2rem;
+  padding: 4rem var(--mobile-inline-padding, 2rem);
 }
 
 #main form {
@@ -54,6 +57,12 @@ cc-footer {
   }
 }
 
+@media (max-width: 800px) {
+  cc-form-layout::part(container) {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 .logo {
   width: 25rem;
 }
@@ -79,13 +88,21 @@ tr > td:not(:last-child) {
   text-overflow: ellipsis;
 }
 
+tbody > :nth-child(even) {
+  background-color: #f9f9f9;
+}
+
 tr > th {
   padding-block: 0.5rem;
 }
 
 tr {
   display: grid;
-  grid-template-columns: calc(30ch + 2vw) 20ch 10ch 10ch 10ch 10ch 10ch 10ch 10ch 1fr;
+  grid-template-columns: calc(30ch + 2vw) 20ch 10ch 10ch 10ch 10ch 10ch 10ch 5ch 10ch 1fr;
+}
+
+thead tr {
+  align-items: end;
 }
 
 .logo {
