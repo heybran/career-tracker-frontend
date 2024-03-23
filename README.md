@@ -1,23 +1,7 @@
-<<<<<<< HEAD
 # Jobs Tracker 
 
-A jobs tracker application built with vanilla `Web Components` as frontend and `Node.js` as backend.
+A jobs tracker application built with vanilla `Web Components` as frontend and `WordPress` & `PHP` as backend.
 
-## Motivation.
-
-I have been hunting for new remote front-end developer jobs for the last few months. As a developer I hate to keep track of the companies that I have applied with Excel, so I create this jobs tracker to improve the whole experience. This project is intended to run locally.
-
-This is a refactoring of another project of mine (private repo) which is built with `Web Components` as frontend and `PHP` as backend with `AWS DynamoDB`.
-
-## Tech Stack
-
-- Web Components
-- [Cucumber Components](https://github.com/heybran/cucumber-components)
-- Node.js/Express.js
-- XATA Database (https://xata.io/)
-
-
-mkcert -key-file key.pem -cert-file cert.pem localhost
-=======
-# career-tracker-frontend
->>>>>>> 374489a4ea03084b98e3a0656a38e40a24d3ab3f
+## Generate SSL certificates locally
+- mkcert -key-file key.pem -cert-file cert.pem localhost
+- openssl req -x509 -nodes -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365

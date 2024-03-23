@@ -50,6 +50,9 @@ export default class CucumberRouter {
    * @returns {void}
    */
   navigateTo(url) {
+    if (url.endsWith('?')) {
+      url = url.replace('?', '');
+    }
     window.history.pushState({ url }, "", url);
     this._onChanged();
   }
@@ -95,7 +98,7 @@ export default class CucumberRouter {
       return this.redirect(route.redirect.path);
     }
 
-    this.outlet.innerHTML = '';
+    
     const spinnerID = this.outlet.getAttribute('router-spinner');
     // @TODO: spinner need to be first element child of this template,
     // as content.cloneNode(true) is #document-fragment, not general DOM node
@@ -108,7 +111,10 @@ export default class CucumberRouter {
 
     this._currentRoute = route;
     this._routesVisited.push(this._currentRoute);
-    this.outlet.replaceChildren(template.content.cloneNode(true));
+    if (this._currentRoute?.path !== this._previousRoute?.path) {
+      this.outlet.innerHTML = '';
+      this.outlet.replaceChildren(template.content.cloneNode(true));
+    }
     
     if (isFunction(route.load)) {
       route.load({ route, params, search });
@@ -219,5 +225,27 @@ export default class CucumberRouter {
     }
 
     this.navigateTo(href);
+  }
+
+  /**
+   * Add or remove search param to current url.
+   * @param {HTMLInputElement} checkbox 
+   * @param {string} value
+   * @returns void
+   */
+  toggleParam(checkbox, value) {
+    const params = new URLSearchParams(location.search);
+    const name = checkbox.getAttribute('name')
+    if (checkbox.reflectTarget.checked) {
+      !params.has(name) && params.set(name, value);
+    } else if (!checkbox.reflectTarget.checked) {
+      params.has(name) && params.delete(name);
+    }
+    
+    /**
+     * Need to update router to only update page when params changes,
+     * while pathname is not changed.
+     */
+    this.navigateTo(`${location.pathname}?${params.toString()}`);
   }
 }
