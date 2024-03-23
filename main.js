@@ -1,5 +1,4 @@
 // @ts-check
-import "./src/components/footer.js";
 import "cucumber-web-components/dist/side-nav";
 import "cucumber-web-components/dist/side-nav-item";
 import "cucumber-web-components/dist/icon";
@@ -23,7 +22,6 @@ import "cucumber-web-components/dist/badge";
 import "cucumber-web-components/dist/popover-wrapper";
 import "cucumber-web-components/dist/popover";
 import "cucumber-web-components/dist/divider";
-import "cucumber-web-components/dist/switch";
 import JobController from "./job.js";
 import User from "./src/user.js";
 import CucumberRouter from "./src/router/index.js";
@@ -59,16 +57,25 @@ import { renderTable, renderFormElements } from "./dom.js";
     {
       path: '/jobs',
       load: async ({ route, params }) => {
+        const container = document.querySelector('tbody[render-target]');
         let jobs;
-        if (window.config?.jobs && !route.expired) {
-          jobs = window.config.jobs
-        } else {
-          const res = await fetch(window.config.endpoint + '/jobs', { credentials: 'include' });
+
+        if (ROUTER._previousRoute && ROUTER._previousRoute.path === route.path) {
+          const res = await fetch(window.config.endpoint + `/jobs?${new URLSearchParams(location.search).toString()}`, {
+            credentials: 'include',
+          })
           jobs = await res.json();
           window.config.jobs = jobs;
+        } else {
+          if (window.config?.jobs && !route.expired) {
+            jobs = window.config.jobs
+          } else {
+            const res = await fetch(window.config.endpoint + `/jobs?${new URLSearchParams(location.search).toString()}`, { credentials: 'include' });
+            jobs = await res.json();
+            window.config.jobs = jobs;
+          }
         }
-
-        const container = document.querySelector('tbody[render-target]');
+        
         if (jobs.length) {
           container.innerHTML = renderTable(jobs);
         } else {
@@ -107,6 +114,10 @@ import { renderTable, renderFormElements } from "./dom.js";
     },
     {
       path: "/account/setting",
+      load: async({ route, serach }) => {
+        allow_password_login.checked = window.config.user.allowPasswordLogin;
+        displayName.value = window.config.user.displayName;
+      }
     },
     {
       path: "/activate-account",  
