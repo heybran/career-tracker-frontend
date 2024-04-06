@@ -235,3 +235,7 @@ body:has(#welcome) footer {
     display: block;
   }
 }
+.trix-content {
+  border-radius: 8px;
+  border-color: #adaba8;
+}
