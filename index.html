@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:300,500,regular,|Poppins:700,regular,|Poppins:100,200,300,400,500,600,700,800,900">
     <title>Jobs Tracker</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+    <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <style>
       cc-spinner {
@@ -93,7 +95,11 @@
                 <cc-option value="rejected">Rejected</cc-option>
                 <cc-option value="not-applied">Not Applied</cc-option>
               </cc-select>
-              <cc-textarea label="Notes" name="notes" colspan="2" helper-text="Maximum characters allowed: 3000"></cc-textarea>
+              <div colspan="2">
+                <label for="notes" style="font-weight: 600;">Notes</label>
+                <input id="notes" type="hidden" name="notes">
+                <trix-editor input="notes" class="trix-content"></trix-editor>
+              </div>
               <cc-radio-group label="Apply channel" name="apply_channel" colspan="2">
                 <cc-radio label="Email" value="email"></cc-radio>
                 <cc-radio label="Job application form" value="job-application-form"></cc-radio>
