@@ -1,9 +1,5 @@
 export default class Signin extends HTMLElement {
   static tagName = "sign-in";
-  constructor() {
-    super();
-    this.attachShadow({ mode: "open" });
-  }
 
   /**
    * Sign in with email & password if allow password login is set to true.
@@ -55,7 +51,7 @@ export default class Signin extends HTMLElement {
   };
 
   connectedCallback() {
-    this.shadowRoot.innerHTML = `
+    this.innerHTML = `
         <h1>
           <img src="/career-tracker.svg" alt="Career Tracker Logo" class="logo">
           <cc-visually-hidden>Career Tracker</cc-visually-hidden>
@@ -63,21 +59,24 @@ export default class Signin extends HTMLElement {
         <div class="form-wrapper">
           <form method="post" onsubmit="window.user.signin(event);" id="signin-form">
             <p>Welcome back! Enter your email which you used to register the account, and a login link will be sent to your inbox.</p>
-            <cc-email-field label="Email address" name="email" required></cc-email-field>
-            <sp-button size="m" type="submit">Ok, send me the link</sp-button>
+            <div>
+              <sp-field-label for="email_address">Email address</sp-field-label>
+              <sp-textfield id="email_address" name="email" type="email" required></sp-textfield>
+            </div>
+            <sp-button size="m" type="submit" style="margin-top: 0.5rem;">Ok, send me the link</sp-button>
           </form>
           <cc-divider text="Or"></cc-divider>
-          <form method="post" onsubmit="this.getRootNode().host.signinWithPassword(event);">
+          <form method="post" onsubmit="this.closest('${this.localName}').signinWithPassword(event);">
             <p>Signin with email and password</p>
             <div>
-            <sp-field-label for="email">Email address</sp-field-label>
-            <sp-textfield id="email" name="email" type="email" required></sp-textfield>
+              <sp-field-label for="email">Email address</sp-field-label>
+              <sp-textfield id="email" name="email" type="email" required></sp-textfield>
             </div>
             <div>
             <sp-field-label for="password">Password</sp-field-label>
             <sp-textfield id="password" name="password" type="password" required></sp-textfield>
             </div>
-            <sp-button size="m" type="submit">Submit</sp-button>
+            <sp-button size="m" type="submit" style="margin-top: 0.5rem;">Submit</sp-button>
           </form>
           <small><p>Do not have an account? <a href="/signup">Sign up here</a>.</p></small>
         </div>

@@ -24,37 +24,6 @@
     <template id="spinner">
       <cc-spinner style="--size: 2em"></cc-spinner>
     </template>
-    <template path="/signup">
-      <article class="narrow-content signup">
-        <h1>
-          <img src="/career-tracker.svg" alt="Career Tracker Logo" class="logo">
-          <cc-visually-hidden>Career Tracker</cc-visually-hidden>
-        </h1>
-        <form method="post" onsubmit="window.user.signup(event);" id="signup-form" class="form-wrapper">
-          <p>Hi there, welcome! You can signup for an account by entering your email address, a signup link will be sent to your inbox.</p>
-          <cc-email-field label="Email address" name="email" required></cc-email-field>
-          <cc-button type="submit" theme="primary" colspan="2" style="width: 100%; margin-top: 1rem;">Continue</cc-button>
-          <small><p>Already have an account? <a href="/signin">Sign in here</a>.</p></small>
-          <!-- <cc-divider text="Or"></cc-divider>
-          <cc-button style="display: flex;">
-            <img src="/github.svg" width="24" height="24" style="margin-right: 0.5rem;">
-            Continue with Github
-          </cc-button> -->
-        </form>
-      </article>
-    </template>
-    <template path="/">
-      <article id="welcome">
-        <h1>
-          <img src="/career-tracker.svg" alt="Career Tracker Logo" class="logo">
-          <cc-visually-hidden>Career Tracker</cc-visually-hidden>
-        </h1>
-        <p>A tiny web app that helps you track the jobs you applied, built with vanilla JavaScript & Web Components on frontend and WordPress & PHP as backend.</p>
-        <cc-horizontal-layout style="justify-content: center;">
-          <cc-button href="/signup" theme="primary" style="width: 20rem;">Get started</cc-button>
-        </cc-horizontal-layout>
-      </article>
-    </template>
     <template path="/jobs/edit" protected-route>
       <article>
         <div>
@@ -339,8 +308,8 @@
         <cc-header></cc-header>
         <main id="app"></main>
         <footer>
-          Crafted by <a href="https://github.com/heybran">@heybran.</a>
-          Logo icon is downloaded from <a href="https://icons8.com/">Icons8</a>.
+          Crafted by <a href="https://github.com/heybran">@heybran</a>
+          Logo icon is downloaded from <a href="https://icons8.com/">Icons8</a>
         </footer>
         <div role="region" aria-live="polite" aria-atomic="true"></div>
       </div>
