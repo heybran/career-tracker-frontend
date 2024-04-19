@@ -4,20 +4,22 @@ export const render = async (tagName, outlet) => {
 };
 
 export const toast = {
-  success: (content, variant) => {
-    return _toast(content, "positive");
+  success: (content, stayOnPage) => {
+    return _toast(content, "positive", stayOnPage);
   },
-  error: (content, variant) => {
-    return _toast(content, "negative");
+  error: (content, stayOnPage) => {
+    return _toast(content, "negative", stayOnPage);
   },
 };
 
-const _toast = (content, variant) => {
+const _toast = (content, variant, stayOnPage = false) => {
   const toast = document.createElement("sp-toast");
   toast.open = true;
   toast.variant = variant;
   toast.innerHTML = content;
-  toast.timeout = 6000;
+  if (!stayOnPage) {
+    toast.timeout = 6000;
+  }
   document.querySelector("[role=region]").appendChild(toast);
 };
 

@@ -1,12 +1,12 @@
 export default class Header extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
     this.render();
-    document.body.classList.add('hidrated');
+    document.body.classList.add("hidrated");
   }
 
   render() {
@@ -15,7 +15,7 @@ export default class Header extends HTMLElement {
         header {
           display: grid;
           align-items: center;
-          grid-template-columns: auto 1fr;
+          grid-template-columns: max-content min-content auto auto;
           gap: 1rem;
           padding: 1rem var(--mobile-inline-padding, 2rem);
           border-bottom: 1px solid #e6e6e6;
@@ -93,6 +93,9 @@ export default class Header extends HTMLElement {
           cc-button#open-nav {
             display: initial;
           }
+          cc-divider {
+            display: none;
+          }
         }
       </style>
       <header>
@@ -100,6 +103,7 @@ export default class Header extends HTMLElement {
           <cc-visually-hidden>Visit Career Tracker Homepage</cc-visually-hidden>
           <img src="/career-tracker.svg" alt="Career Tracker Logo" role="img">
         </a>
+        <cc-divider theme="vertical"></cc-divider>
         <cc-button id="open-nav" onclick="this.parentElement.classList.add('nav-opened')">Menu</cc-button>
         <div class="side-nav-wrapper">
           <cc-side-nav horizontal>
@@ -116,19 +120,34 @@ export default class Header extends HTMLElement {
               Jobs
             </cc-side-nav-item>
           </cc-side-nav>
-          <sp-action-menu label="Account" placement="bottom-end" style="margin-inline-start: auto;" quiet>
-            <sp-menu-item>Account Settings</sp-menu-item>
-            <sp-menu-item>My Profile</sp-menu-item>
-            <sp-menu-divider></sp-menu-divider>
-            <sp-menu-item>Share</sp-menu-item>
-            <sp-menu-divider></sp-menu-divider>
-            <sp-menu-item>Help</sp-menu-item>
-            <sp-menu-item>Sign Out</sp-menu-item>
-          </sp-action-menu>
         </div>
+        <sp-action-menu label="Account" placement="bottom-end" style="margin-inline-start: auto;" quiet>
+          <sp-menu-item>Account Settings</sp-menu-item>
+          <sp-menu-item>My Profile</sp-menu-item>
+          <sp-menu-divider></sp-menu-divider>
+          <sp-menu-item>Share</sp-menu-item>
+          <sp-menu-divider></sp-menu-divider>
+          <sp-menu-item>Help</sp-menu-item>
+          <sp-menu-item onclick="this.getRootNode().host.signout(this)">Sign Out</sp-menu-item>
+        </sp-action-menu>
       </header>
-    `; 
+    `;
   }
+
+  signout = (button) => {
+    fetch(window.config.endpoint + "/users/signout", {
+      method: "POST",
+      credentials: "include",
+    })
+      .then((res) => {
+        if (res.ok) {
+          location.href = "/";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 }
 
 customElements.define('cc-header', Header);

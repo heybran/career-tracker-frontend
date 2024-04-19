@@ -70,12 +70,35 @@ window.ROUTER = new BreezeRouter();
     }
   }
 
-  ROUTER.add("/", async () => {
-    // Handle the root route
+  /** @type {HTMLElement | null} */
+  const outlet = document.querySelector("#app");
+
+  ROUTER.add("/", async ({ route, params }) => {
+    try {
+      const {
+        default: { tagName },
+      } = await import("./src/pages/index.js");
+      render(tagName, outlet);
+    } catch (error) {}
   });
 
-  // Outlet
-  const outlet = document.querySelector("#app");
+  ROUTER.add("/signup", async ({ route, params }) => {
+    try {
+      const {
+        default: { tagName },
+      } = await import("./src/pages/signup/index.js");
+      render(tagName, outlet);
+    } catch (error) {}
+  });
+
+  ROUTER.add("/signin", async ({ route, params }) => {
+    try {
+      const {
+        default: { tagName },
+      } = await import("./src/pages/signin/index.js");
+      render(tagName, outlet);
+    } catch (error) {}
+  });
 
   ROUTER.add("/jobs/add", async ({ route, params }) => {
     try {

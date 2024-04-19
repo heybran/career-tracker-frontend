@@ -53,52 +53,52 @@ export default class AddJob extends HTMLElement {
         <p>Fill in this form to add a new job to the datbase.</p>
         </div>
         <form method="post" onsubmit="this.closest('${this.constructor.tagName}').addJob(event)">
-                <cc-form-layout>
-                  <div>
-                    <sp-field-label for="website">Website</sp-field-label>
-                    <sp-textfield id="website" required name="website"></sp-textfield>
-                  </div>
-                  <div>
-                    <sp-field-label for="position">Position</sp-field-label>
-                    <sp-textfield id="position" required name="position"></sp-textfield>
-                  </div>
-                  <div>
-                    <sp-field-label for="source">Source</sp-field-label>
-                    <sp-textfield id="source" name="source"></sp-textfield>
-                  </div>
-                  <div>
-                    <sp-field-label for="date_applied">Apply Date</sp-field-label>
-                    <sp-textfield id="date_applied" name="date_applied"></sp-textfield>
-                  </div>
-                  <div>
-                    <sp-field-label for="status">Status</sp-field-label>
-                    <sp-combobox id="status" name="status">
-                      <sp-menu-item value="pending">Pending</sp-menu-item>
-                      <sp-menu-item value="rejected">Rejected</sp-menu-item>
-                      <sp-menu-item value="not-applied" checked>Not applied</sp-menu-item>
-                    </sp-combobox>
-                  </div>
-                  <div>
-                    <sp-field-label for="apply_channel">Apply Channel</sp-field-label>
-                    <sp-combobox id="apply_channel" name="apply_channel">
-                      <sp-menu-item value="job_application_form">Jon Application Form</sp-menu-item>
-                      <sp-menu-item value="email">Email</sp-menu-item>
-                      <sp-menu-item value="linkedin">LinkedIn</sp-menu-item>
-                    </sp-combobox>
-                  </div>
-                  <div colspan="2">
-                    <sp-field-label for="notes">Notes</sp-field-label>
-                    <input id="notes" type="hidden" name="notes">
-                    <trix-editor input="notes" class="trix-content"></trix-editor>
-                  </div>
-                </cc-form-layout>
-                  <cc-horizontal-layout>
-                    <sp-checkbox name="freelance">Freelance</sp-checkbox>
-                    <sp-checkbox name="volunteer_position">Volunteer Position</sp-checkbox>
-                    <sp-checkbox name="four_day_week">4 Day Week</sp-checkbox>
-                  </cc-horizontal-layout>
-                  <sp-button size="m" type="submit">Submit</sp-button>
-              </form>
+          <cc-form-layout>
+            <div>
+              <sp-field-label for="website">Website</sp-field-label>
+              <sp-textfield id="website" required name="website"></sp-textfield>
+            </div>
+            <div>
+              <sp-field-label for="position">Position</sp-field-label>
+              <sp-textfield id="position" required name="position"></sp-textfield>
+            </div>
+            <div>
+              <sp-field-label for="source">Source</sp-field-label>
+              <sp-textfield id="source" name="source"></sp-textfield>
+            </div>
+            <div>
+              <sp-field-label for="date_applied">Apply Date</sp-field-label>
+              <sp-textfield id="date_applied" name="date_applied"></sp-textfield>
+            </div>
+            <div>
+              <sp-field-label for="status">Status</sp-field-label>
+              <sp-combobox id="status" name="status">
+                <sp-menu-item value="pending">Pending</sp-menu-item>
+                <sp-menu-item value="rejected">Rejected</sp-menu-item>
+                <sp-menu-item value="not-applied" checked>Not applied</sp-menu-item>
+              </sp-combobox>
+            </div>
+            <div>
+              <sp-field-label for="apply_channel">Apply Channel</sp-field-label>
+              <sp-combobox id="apply_channel" name="apply_channel">
+                <sp-menu-item value="job_application_form">Jon Application Form</sp-menu-item>
+                <sp-menu-item value="email">Email</sp-menu-item>
+                <sp-menu-item value="linkedin">LinkedIn</sp-menu-item>
+              </sp-combobox>
+            </div>
+            <div colspan="2">
+              <sp-field-label for="notes">Notes</sp-field-label>
+              <input id="notes" type="hidden" name="notes">
+              <trix-editor input="notes" class="trix-content"></trix-editor>
+            </div>
+          </cc-form-layout>
+            <cc-horizontal-layout>
+              <sp-checkbox name="freelance">Freelance</sp-checkbox>
+              <sp-checkbox name="volunteer_position">Volunteer Position</sp-checkbox>
+              <sp-checkbox name="four_day_week">4 Day Week</sp-checkbox>
+            </cc-horizontal-layout>
+            <sp-button size="m" type="submit">Submit</sp-button>
+        </form>
       </div>
         
         `;
