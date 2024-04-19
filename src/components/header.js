@@ -116,27 +116,15 @@ export default class Header extends HTMLElement {
               Jobs
             </cc-side-nav-item>
           </cc-side-nav>
-          ${window.config?.user ? `
-            <cc-popover-wrapper>
-              <cc-button slot="trigger">
-                ${window.config.user?.displayName || window.config.user.email}
-                <cc-icon icon="chevron-down" slot="suffix"></cc-icon>
-              </cc-button>
-              <cc-popover placement="bottom-end">
-                <ul>
-                  <li>
-                    <cc-button style="width: 100%" href="/account/setting">Account setting</cc-button>
-                  </li>
-                  <li>
-                    <cc-button style="width: 100%" onclick="window.user.signout(this)">Sign out</cc-button>
-                  </li>
-                </ul>
-              </cc-popover>
-            </cc-popover-wrapper>
-          ` : `
-            <cc-button href="/signin">Sign in</cc-button>
-            <cc-button href="/signup" theme="primary">Sign up</cc-button>
-          `}
+          <sp-action-menu label="Account" placement="bottom-end" style="margin-inline-start: auto;" quiet>
+            <sp-menu-item>Account Settings</sp-menu-item>
+            <sp-menu-item>My Profile</sp-menu-item>
+            <sp-menu-divider></sp-menu-divider>
+            <sp-menu-item>Share</sp-menu-item>
+            <sp-menu-divider></sp-menu-divider>
+            <sp-menu-item>Help</sp-menu-item>
+            <sp-menu-item>Sign Out</sp-menu-item>
+          </sp-action-menu>
         </div>
       </header>
     `; 
