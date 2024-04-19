@@ -43,29 +43,6 @@
         </form>
       </article>
     </template>
-    <template path="/signin">
-      <article class="narrow-content signin">
-        <h1>
-          <img src="/career-tracker.svg" alt="Career Tracker Logo" class="logo">
-          <cc-visually-hidden>Career Tracker</cc-visually-hidden>
-        </h1>
-        <div class="form-wrapper">
-          <form method="post" onsubmit="window.user.signin(event);" id="signin-form">
-            <p>Welcome back! Enter your email which you used to register the account, and a login link will be sent to your inbox.</p>
-            <cc-email-field label="Email address" name="email" required></cc-email-field>
-            <cc-button type="submit" theme="primary" colspan="2" style="width: 100%; margin-top: 1rem;">Ok, send me the link</cc-button>
-          </form>
-          <cc-divider text="Or"></cc-divider>
-          <form method="post" onsubmit="window.user.signinWithPassword(event);" id="password-signin-form">
-            <p>Signin with email and password</p>
-            <cc-email-field label="Email address" name="email" required></cc-email-field>
-            <cc-password-field label="Password" name="password" required></cc-password-field>
-            <cc-button type="submit" theme="primary" colspan="2" style="width: 100%; margin-top: 1rem;">Submit</cc-button>
-          </form>
-          <small><p>Do not have an account? <a href="/signup">Sign up here</a>.</p></small>
-        </div>
-      </article>
-    </template>
     <template path="/">
       <article id="welcome">
         <h1>
@@ -77,149 +54,6 @@
           <cc-button href="/signup" theme="primary" style="width: 20rem;">Get started</cc-button>
         </cc-horizontal-layout>
       </article>
-    </template>
-    <template path="/jobs/add" protected-route redirect="/signin">
-        <article class="medium-content">
-          <div>
-            <h1>Add A New Job</h1>
-            <p>Fill in this form to add a new job to the datbase.</p>
-          </div>
-          <form method="post" onsubmit="window.jobController.add(event);">
-            <cc-form-layout>
-              <cc-text-field label="Website" name="website" required></cc-text-field>
-              <cc-text-field label="Position" name="position" required></cc-text-field>
-              <cc-text-field label="Source" name="source"></cc-text-field>
-              <cc-date-picker label="Date Applied" required name="date_applied"></cc-date-picker>
-              <cc-select name="status" label="Status" colspan="2">
-                <cc-option value="pending" aria-selected="true">Pending</cc-option>
-                <cc-option value="rejected">Rejected</cc-option>
-                <cc-option value="not-applied">Not Applied</cc-option>
-              </cc-select>
-              <div colspan="2">
-                <label for="notes" style="font-weight: 600;">Notes</label>
-                <input id="notes" type="hidden" name="notes">
-                <trix-editor input="notes" class="trix-content"></trix-editor>
-              </div>
-              <cc-radio-group label="Apply channel" name="apply_channel" colspan="2">
-                <cc-radio label="Email" value="email"></cc-radio>
-                <cc-radio label="Job application form" value="job-application-form"></cc-radio>
-                <cc-radio label="LinkedIn" value="linkedin"></cc-radio>
-              </cc-radio-group>
-            </cc-form-layout>
-            <cc-divider></cc-divider>
-            <cc-form-layout style="--cc-form-layout-columns--global: 3;">
-              <cc-checkbox name="volunteer_position" label="Volunteer position"></cc-checkbox>
-              <cc-checkbox name="freelance" label="Freelance"></cc-checkbox>
-              <cc-checkbox name="four_day_week" label="4 day week"></cc-checkbox>
-            </cc-form-layout>
-            <cc-button type="submit" theme="primary" style="margin-top: 1rem;">Submit</cc-button>
-          </form>
-        </article>
-    </template>
-    <template path="/jobs" protected-route>
-      <article>
-        <!-- <copycat-switch id="table_filter_switch">
-          <template shadowrootmode="open">
-              <style>
-                  :host {
-                      display: inline-block;
-                  }
-                  [part="wrapper"] {
-                      cursor: pointer;
-                      display: inline-flex;
-                      align-items: center;
-                      gap: var(--copycat-switch-gap, 0.5em);
-                  }
-                  ::slotted(input) {
-                      flex-shrink: 0;
-                      margin: 0;
-                      box-sizing: border-box;
-                      position: relative;
-                      display: inline-flex;
-                      align-items: center;
-                      justify-content: space-between;
-                      --_border-width: var(--copycat-switch-border-width, 2px);
-                      border: var(--_border-width) solid var(--copycat-switch-border-color, #adaba8);
-                      --_circle-spacing: var(--copycat-switch-circle-spacing, 1px);
-                      --_height: var(--copycat-switch-height, 36px);
-                      height: var(--_height);
-                      --_circle-size: calc(var(--_height) - (var(--_border-width) + var(--_circle-spacing)) * 2);
-                      border-radius: var(--_height);
-                      --_width: calc(var(--_circle-size) * 2.2);
-                      width: var(--_width);
-                      appearance: none;
-                  }
-                  ::slotted(input)::before {
-                      box-sizing: border-box;
-                      content: "";
-                      left: var(--_circle-spacing);
-                      position: absolute;
-                      top: var(--_circle-spacing);
-                      background-color: var(--copycat-switch-background-color, #adaba8);
-                      border-radius: 1.7142857143em;
-                      transform: translateX(0);
-                      transition: transform .25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color .25s cubic-bezier(0.33, 1, 0.68, 1);
-                      width: var(--_circle-size);
-                      height: var(--_circle-size);
-                  }
-                  ::slotted(input:checked)::before {
-                      transform: translateX(calc(var(--_width) - var(--_circle-size) - var(--_border-width) * 2 - var(--_circle-spacing) * 2));
-                      background-color: var(--copycat-switch-color-primary, #1c7ed6);
-                  }
-                  ::slotted(input:checked) {
-                      border-color: var(--copycat-switch-color-primary, #1c7ed6);
-                  }
-                  ::slotted(label) {
-                      /* cursor: pointer; */
-                      /* display: inline-flex; */
-                      /* align-items: center; */
-                  }
-              </style>
-              <div part="wrapper">
-                  <slot name="input"></slot>
-                  <slot name="label"></slot>
-              </div>
-          </template>
-          <input 
-            slot="input" 
-            type="checkbox" 
-            role="switch" 
-            name="show_table_filter"  
-            id="show_table_filter"
-          >
-          <label slot="label" for="show_table_filter">
-            Show table filter
-          </label>
-        </copycat-switch> -->
-        <section class="table_filter">
-          <cc-horizontal-layout>
-            <cc-checkbox name="freelance" label="Freelance" onchange="window.ROUTER.toggleParam(this, 1)"></cc-checkbox>
-            <cc-checkbox name="four_day_week" label="4 day week" onchange="window.ROUTER.toggleParam(this, 1)"></cc-checkbox>
-            <cc-checkbox name="volunteer_position" label="Volunteer position" onchange="window.ROUTER.toggleParam(this, 1)"></cc-checkbox>
-          </cc-horizontal-layout>
-        </section>
-        <table>
-          <thead>
-            <tr>
-              <th>Website</th>
-              <th>Position</th>
-              <th>Source</th>
-              <th>Date Applied</th>
-              <th>Apply Channel</th>
-              <th>Status</th>
-              <th>Volunteer Position</th>
-              <th>Freelance</th>
-              <th>4 <br>Day<br> Week</th>
-              <th>Notes</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody render-target>
-          </tbody>
-        </table>
-      </article>
-      <cc-dialog label="Delete Job" id="delete-job-dialog">
-      </cc-dialog>
     </template>
     <template path="/jobs/edit" protected-route>
       <article>
@@ -500,14 +334,17 @@
           </div>
         </article>
     </template>
-    <cc-header></cc-header>
-    <div id="app">
-      <main router-outlet router-spinner="spinner"></main>
-      <footer>
-        Crafted by <a href="https://github.com/heybran">@heybran.</a>
-        Logo icon is downloaded from <a href="https://icons8.com/">Icons8</a>.
-      </footer>
-    </div>
+    <sp-theme theme="spectrum" color="light" scale="large">
+      <div class="container">
+        <cc-header></cc-header>
+        <main id="app"></main>
+        <footer>
+          Crafted by <a href="https://github.com/heybran">@heybran.</a>
+          Logo icon is downloaded from <a href="https://icons8.com/">Icons8</a>.
+        </footer>
+        <div role="region" aria-live="polite" aria-atomic="true"></div>
+      </div>
+    </sp-theme>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
