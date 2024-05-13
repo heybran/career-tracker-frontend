@@ -26,7 +26,6 @@ export default class EditJob extends UtilsMixin(HTMLElement) {
         elem.hasAttribute("required") &&
         !elem.hasAttribute("data-trix-input")
     );
-    console.log(invalidElement);
     if (invalidElement) {
       return this.getLabel(invalidElement).scrollIntoView({ block: "start" });
     }

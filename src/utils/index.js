@@ -1,3 +1,5 @@
+import { makeToast } from "./makeToast";
+
 export const render = async (tagName, outlet) => {
   const page = document.createElement(tagName);
   outlet.replaceChildren(page);
@@ -5,7 +7,7 @@ export const render = async (tagName, outlet) => {
 
 export const toast = {
   success: (content, stayOnPage) => {
-    return _toast(content, "positive", stayOnPage);
+    return makeToast(content, "success", stayOnPage);
   },
   error: (content, stayOnPage) => {
     return _toast(content, "negative", stayOnPage);

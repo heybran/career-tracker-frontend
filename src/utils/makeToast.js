@@ -6,6 +6,8 @@ const icons = {
     `,
 };
 
+const toastOpened = new Set();
+
 class Toast extends HTMLElement {
   static tagName = "cc-toast";
   constructor() {
@@ -15,72 +17,74 @@ class Toast extends HTMLElement {
 
   connectedCallback() {
     this.shadowRoot.innerHTML = `
-          <style>
-            :popover-open {
-              position: fixed;
-              inset: unset;
-              bottom: 5px;
-              right: 5px;
-              margin: 0;
-              display: grid;
-              grid-template-columns: max-content 1fr max-content auto;
-              align-items: center;
-              gap: 10px;
-            }
-            [popover] > :first-child {
-              width: 2rem;
-              height: 2rem;
-              flex-shrink: 0;
-              fill: white;
-            }
-            button {
-              background: transparent;
-    color: white;
-    border: none;
-    padding: 0;
-            }
-            cc-button::part(button):hover {
-              background-color: darkseagreen;
-            }
-            [popover] {
-              width: 100%;
-              max-width: 35ch;
-              background-color: green;
-              color: white;
-              border-radius: 6px;
-              border: none;
-              padding: 10px;
-              padding-left: 20px;
-              opacity: 0;
-              transform: translateY(20px);
-              transition: 
-                opacity 0.3s,
-                transform 0.3s,
-                overlay 0.3s allow-discrete,
-                display 0.3s allow-discrete;
-            }
-            [popover]:popover-open {
-              opacity: 1;
-              transform: translateY(0);
-            }
-            @starting-style {
-              [popover]:popover-open {
-                opacity: 0;
-                transform: translateY(20px);
-              }
-            }
-          </style>
-          <div part="body" popover="manual">
-          ${this.getIcon()} 
-            <div part="content">
-                <slot></slot>
-            </div>
-            <cc-divider theme="vertical" style="--color: white; --spacing: 0;"></cc-divider>
-            <cc-button type="button" theme="icon borderless round" onclick="this.getRootNode().host.remove()">
-              <cc-icon icon="cross" style="--size: 2rem;"></cc-icon>
-              <cc-visually-hidden>Close</cc-visually-hidden>
-            </cc-button>
-          </div>
+      <style>
+        :popover-open {
+          position: fixed;
+          inset: unset;
+          bottom: var(--bottom, 5px);
+          right: 5px;
+          margin: 0;
+          display: grid;
+          grid-template-columns: max-content 1fr max-content auto;
+          align-items: center;
+          gap: 10px;
+        }
+        [popover] > :first-child {
+          width: 2rem;
+          height: 2rem;
+          flex-shrink: 0;
+          fill: white;
+        }
+        button {
+          background: transparent;
+          color: white;
+          border: none;
+          padding: 0;
+        }
+        cc-button::part(button):hover {
+          background-color: darkseagreen;
+        }
+        [popover] {
+          width: 100%;
+          max-width: 35ch;
+          background-color: green;
+          color: white;
+          border-radius: 6px;
+          border: none;
+          padding: 10px;
+          padding-left: 20px;
+          opacity: 0;
+          transform: translateY(20px);
+          transition: 
+            bottom 0.3s,
+            opacity 0.3s,
+            transform 0.3s,
+            bottom 0.3s allow-discrete,
+            overlay 0.3s allow-discrete,
+            display 0.3s allow-discrete;
+        }
+        [popover]:popover-open {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        @starting-style {
+          [popover]:popover-open {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+        }
+      </style>
+      <div part="body" popover="manual">
+        ${this.getIcon()} 
+        <div part="content">
+            <slot></slot>
+        </div>
+        <cc-divider theme="vertical" style="--color: white; --spacing: 0;"></cc-divider>
+        <cc-button type="button" theme="icon borderless round" onclick="this.getRootNode().host.removeFromDOM()">
+          <cc-icon icon="cross" style="--size: 2rem;"></cc-icon>
+          <cc-visually-hidden>Close</cc-visually-hidden>
+        </cc-button>
+      </div>
     `;
 
     // TODO: need to add --hover-bg-color custom properties to cc-button
@@ -89,25 +93,29 @@ class Toast extends HTMLElement {
 
   moveToastsUp = (event) => {
     if (event.newState === "open") {
-      // If the toast is the one that has just appeared, we don't want it to move up.
-      if (this.classList.contains("newest")) {
-        this.style.bottom = `5px`;
-        this.classList.remove("newest");
-      } else {
+      toastOpened.forEach((toast) => {
         // Move up all the other toasts by 50px to make way for the new one
-        const prevValue = this.style.bottom.replace("px", "");
-        const newValue = parseInt(prevValue) + 50;
-        this.style.bottom = `${newValue}px`;
-      }
+        const prevValue = toast.style
+          .getPropertyValue("--bottom")
+          .replace("px", "");
+        const newValue = parseInt(prevValue) + 80;
+        toast.style.setProperty("--bottom", `${newValue}px`);
+        toast.classList.remove("newest");
+      });
+
+      this.classList.add("newest");
+      this.style.setProperty("--bottom", `${5}px`);
+      toastOpened.add(this);
     }
   };
 
   removeSelf = () => {
-    // const timeout = setTimeout(() => {
-    //   this.popover.hidePopover();
-    //   this.remove();
-    //   clearTimeout(timeout);
-    // }, 4000);
+    const timeout = setTimeout(() => {
+      this.popover.hidePopover();
+      this.remove();
+      toastOpened.delete(this);
+      clearTimeout(timeout);
+    }, 4000);
   };
 
   getIcon = () => {
@@ -129,7 +137,7 @@ class Toast extends HTMLElement {
     this.removeSelf();
   };
 
-  remove = () => {
+  removeFromDOM = () => {
     const success = this.dispatchEvent(
       new CustomEvent("toast-removed", {
         bubbles: true,
@@ -139,7 +147,7 @@ class Toast extends HTMLElement {
     );
     if (success) {
       this.popover?.hidePopover();
-      this.popover?.remove();
+      this.remove();
     }
   };
 
@@ -157,14 +165,7 @@ customElements.define(Toast.tagName, Toast);
 export function makeToast(message, variant) {
   const toast = document.createElement("cc-toast");
   toast.variant = variant;
-  toast.innerHTML = `
-  ${message}
-  `;
-  toast.classList.add("toast");
-  toast.classList.add("newest");
-
+  toast.innerHTML = message;
   document.body.appendChild(toast);
-
-  // Show the popover
   toast.show();
 }
