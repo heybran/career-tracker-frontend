@@ -1,6 +1,15 @@
 import { makeToast } from "./makeToast";
 
-export const render = async (tagName, outlet) => {
+/**
+ * Renders the content of a page source into the specified outlet element.
+ *
+ * @param {string} pageSrc - The source of the page to render.
+ * @param {HTMLElement} outlet - The element where the page content will be rendered.
+ */
+export const render = async (pageSrc, outlet) => {
+  const {
+    default: { tagName },
+  } = await import(pageSrc);
   const page = document.createElement(tagName);
   outlet.replaceChildren(page);
 };
@@ -12,17 +21,6 @@ export const toast = {
   error: (content, options = {}) => {
     return _toast(content, "error", options);
   },
-};
-
-const _toast = (content, variant, stayOnPage = false) => {
-  const toast = document.createElement("sp-toast");
-  toast.open = true;
-  toast.variant = variant;
-  toast.innerHTML = content;
-  if (!stayOnPage) {
-    toast.timeout = 6000;
-  }
-  document.querySelector("[role=region]").appendChild(toast);
 };
 
 /**
