@@ -18,22 +18,15 @@ class Toast extends HTMLElement {
   connectedCallback() {
     this.shadowRoot.innerHTML = `
       <style>
-        :popover-open {
-          position: fixed;
-          inset: unset;
-          bottom: var(--bottom, 5px);
-          right: 5px;
-          margin: 0;
-          display: grid;
-          grid-template-columns: max-content 1fr max-content auto;
-          align-items: center;
-          gap: 10px;
-        }
-        [popover] > :first-child {
+        [part="status"] {
           width: 2rem;
           height: 2rem;
           flex-shrink: 0;
           fill: white;
+        }
+        svg {
+          width: 100%;
+          height: 100%;
         }
         button {
           background: transparent;
@@ -45,6 +38,9 @@ class Toast extends HTMLElement {
           background-color: darkseagreen;
         }
         [popover] {
+          position: fixed;
+          left: 50%;
+          transform: translateX(-50%) translateY(20px);
           width: 100%;
           max-width: 35ch;
           background-color: green;
@@ -54,7 +50,6 @@ class Toast extends HTMLElement {
           padding: 10px;
           padding-left: 20px;
           opacity: 0;
-          transform: translateY(20px);
           transition: 
             bottom 0.3s,
             opacity 0.3s,
@@ -63,19 +58,31 @@ class Toast extends HTMLElement {
             overlay 0.3s allow-discrete,
             display 0.3s allow-discrete;
         }
+        :host([size="large"]) [popover] {
+          max-width: 60ch;
+        }
         [popover]:popover-open {
           opacity: 1;
-          transform: translateY(0);
+          transform: translateX(-50%) translateY(0);
+          top: auto;
+          bottom: var(--bottom, 5px);
+          margin: 0;
+          display: grid;
+          grid-template-columns: max-content 1fr max-content auto;
+          align-items: center;
+          gap: 10px;
         }
         @starting-style {
           [popover]:popover-open {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateX(-50%) translateY(20px);
           }
         }
       </style>
       <div part="body" popover="manual">
-        ${this.getIcon()} 
+        <div part="status" aria-hidden="true">
+          <slot name="status">${this.getIcon()} </slot>
+        </div>
         <div part="content">
             <slot></slot>
         </div>
@@ -134,7 +141,9 @@ class Toast extends HTMLElement {
 
   show = () => {
     this.popover?.showPopover();
-    this.removeSelf();
+    if (!this.persist) {
+      this.removeSelf();
+    }
   };
 
   removeFromDOM = () => {
@@ -162,9 +171,16 @@ class Toast extends HTMLElement {
 
 customElements.define(Toast.tagName, Toast);
 
-export function makeToast(message, variant) {
+export function makeToast(message, variant, options = {}) {
+  const { persist, size } = options;
   const toast = document.createElement("cc-toast");
   toast.variant = variant;
+  if (persist) {
+    toast.persist = !!persist;
+  }
+  if (!!size) {
+    toast.setAttribute("size", size);
+  }
   toast.innerHTML = message;
   document.body.appendChild(toast);
   toast.show();
