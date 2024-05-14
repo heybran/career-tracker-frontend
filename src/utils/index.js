@@ -6,11 +6,11 @@ export const render = async (tagName, outlet) => {
 };
 
 export const toast = {
-  success: (content, stayOnPage) => {
-    return makeToast(content, "success", stayOnPage);
+  success: (content, options = {}) => {
+    return makeToast(content, "success", options);
   },
-  error: (content, stayOnPage) => {
-    return _toast(content, "negative", stayOnPage);
+  error: (content, options = {}) => {
+    return _toast(content, "error", options);
   },
 };
 
