@@ -21,6 +21,7 @@ import "ccw/badge/index.js";
 import "ccw/popover-wrapper/index.js";
 import "ccw/popover/index.js";
 import "ccw/divider/index.js";
+import "ccw/search-field/index.js";
 
 // import "@spectrum-web-components/theme/sp-theme.js";
 // import "@spectrum-web-components/theme/src/themes.js";
@@ -42,7 +43,6 @@ import "ccw/divider/index.js";
 // import "@spectrum-web-components/menu/sp-menu-item.js";
 // import "@spectrum-web-components/menu/sp-menu-divider.js";
 // import "@spectrum-web-components/action-menu/sp-action-menu.js";
-// import "@spectrum-web-components/search/sp-search.js";
 
 import BreezeRouter from "breeze-router";
 import { render } from "utils/index.js";
@@ -135,7 +135,7 @@ window.ROUTER = new BreezeRouter();
   });
 
   ROUTER.add("/jobs/add", async ({ route, params }) => {
-    render("pages/jobs/index.js", outlet);
+    render("pages/jobs/add.js", outlet);
   });
 
   ROUTER.add("/jobs", async ({ route, params }) => {

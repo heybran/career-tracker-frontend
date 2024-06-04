@@ -1,4 +1,4 @@
-import { toast } from "../../utils";
+import { toast } from "utils/index.js";
 
 export default class AddJob extends HTMLElement {
   static tagName = "add-job";
