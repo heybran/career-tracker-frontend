@@ -20,7 +20,7 @@ export default class JobsList extends UtilsMixin(HTMLElement) {
         <div class="content" part="content">
         <section class="table_filter">
           <cc-horizontal-layout>
-            <sp-checkbox 
+            <cc-checkbox 
               name="freelance" 
               label="Freelance" 
               onchange="window.ROUTER.toggleParam(this, 1)"
@@ -29,8 +29,8 @@ export default class JobsList extends UtilsMixin(HTMLElement) {
               )}
             >
               Freelance
-            </sp-checkbox>
-            <sp-checkbox 
+            </cc-checkbox>
+            <cc-checkbox 
               name="four_day_week" 
               label="4 day week" 
               onchange="window.ROUTER.toggleParam(this, 1)"
@@ -39,8 +39,8 @@ export default class JobsList extends UtilsMixin(HTMLElement) {
               )}
             >
               4 Day Week
-            </sp-checkbox>
-            <sp-checkbox 
+            </cc-checkbox>
+            <cc-checkbox 
               name="volunteer_position" 
               label="Volunteer position" 
               onchange="window.ROUTER.toggleParam(this, 1)"
@@ -51,12 +51,16 @@ export default class JobsList extends UtilsMixin(HTMLElement) {
               )}
             >
               Volunteer Position
-            </sp-checkbox>
-            <sp-search 
-              style="flex-basis: max-content;" 
-              onsubmit="this.closest('${this.localName}').searchJob(event)"
-            >
-            </sp-search>
+            </cc-checkbox>
+            <form onsubmit="this.closest('${
+              this.localName
+            }').searchJob(event)" role="search">
+              <cc-search-field name="q" placeholder="Search">
+                <cc-button slot="suffix" theme="square borderless" type="submit">
+                  <cc-icon label="Submit Search" icon="search"></cc-icon>
+                </cc-button>
+              </cc-search-field>
+            </form>
           </cc-horizontal-layout>
         </section>
         <table>
