@@ -1,4 +1,4 @@
-import { UtilsMixin, toast } from "../../utils";
+import { UtilsMixin, toast } from "utils/index.js";
 
 export default class SignUp extends UtilsMixin(HTMLElement) {
   static tagName = "sign-up";
@@ -6,7 +6,7 @@ export default class SignUp extends UtilsMixin(HTMLElement) {
     this.innerHTML = `
       <div class="content" part="content">
         <h1>
-          <img src="/career-tracker.svg" alt="Career Tracker Logo" class="logo">
+          <img src="/public/career-tracker.svg" alt="Career Tracker Logo" class="logo">
           <cc-visually-hidden>Career Tracker</cc-visually-hidden>
         </h1>
         <form method="post" onsubmit="this.closest('${this.localName}').signup(event);" id="signup-form" class="form-wrapper">

@@ -1,4 +1,4 @@
-import { toast } from "../../utils";
+import { toast } from "utils/index.js";
 
 export default class Signin extends HTMLElement {
   static tagName = "sign-in";
@@ -107,7 +107,7 @@ export default class Signin extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <h1>
-        <img src="/career-tracker.svg" alt="Career Tracker Logo" class="logo">
+        <img src="/public/career-tracker.svg" alt="Career Tracker Logo" class="logo">
         <cc-visually-hidden>Career Tracker</cc-visually-hidden>
       </h1>
       <div class="form-wrapper">

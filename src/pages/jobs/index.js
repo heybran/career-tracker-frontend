@@ -1,4 +1,4 @@
-import { UtilsMixin, toast } from "../../utils";
+import { UtilsMixin, toast } from "utils/index.js";
 
 export default class JobsList extends UtilsMixin(HTMLElement) {
   static tagName = "jobs-list";
