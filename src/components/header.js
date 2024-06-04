@@ -101,7 +101,7 @@ export default class Header extends HTMLElement {
       <header>
         <a href="/">
           <cc-visually-hidden>Visit Career Tracker Homepage</cc-visually-hidden>
-          <img src="/career-tracker.svg" alt="Career Tracker Logo" role="img">
+          <img src="/public/career-tracker.svg" alt="Career Tracker Logo" role="img">
         </a>
         <cc-divider theme="vertical"></cc-divider>
         <cc-button id="open-nav" onclick="this.parentElement.classList.add('nav-opened')">Menu</cc-button>

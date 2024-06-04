@@ -1,4 +1,4 @@
-import { UtilsMixin } from "../utils";
+import { UtilsMixin } from "utils/index.js";
 
 export default class HomePage extends UtilsMixin(HTMLElement) {
   static tagName = "home-page";
@@ -18,7 +18,7 @@ export default class HomePage extends UtilsMixin(HTMLElement) {
         </style>
         <div class="content" part="content">
             <h1 style="text-align: center;">
-                <img src="/career-tracker.svg" alt="Career Tracker Logo" class="logo">
+                <img src="/public/career-tracker.svg" alt="Career Tracker Logo" class="logo">
                 <cc-visually-hidden>Career Tracker</cc-visually-hidden>
             </h1>
         <p>A tiny web app that helps you track the jobs you applied, built with vanilla JavaScript & Web Components on frontend and WordPress & PHP as backend.</p>

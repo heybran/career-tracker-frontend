@@ -1,4 +1,4 @@
-import { makeToast } from "./makeToast";
+import { makeToast } from "./makeToast.js";
 
 /**
  * Renders the content of a page source into the specified outlet element.

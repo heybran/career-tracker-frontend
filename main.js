@@ -1,58 +1,57 @@
-import "cucumber-web-components/dist/side-nav";
-import "cucumber-web-components/dist/side-nav-item";
-import "cucumber-web-components/dist/icon";
-import "cucumber-web-components/dist/form-layout";
-import "cucumber-web-components/dist/text-field";
-import "cucumber-web-components/dist/email-field";
-import "cucumber-web-components/dist/date-picker";
-import "cucumber-web-components/dist/option";
-import "cucumber-web-components/dist/select";
-import "cucumber-web-components/dist/textarea";
-import "cucumber-web-components/dist/checkbox";
-import "cucumber-web-components/dist/dialog";
-import "cucumber-web-components/dist/button";
-import "cucumber-web-components/dist/spinner";
-import "cucumber-web-components/dist/password-field";
-import "cucumber-web-components/dist/radio";
-import "cucumber-web-components/dist/radio-group";
-import "cucumber-web-components/dist/visually-hidden";
-import "cucumber-web-components/dist/horizontal-layout";
-import "cucumber-web-components/dist/badge";
-import "cucumber-web-components/dist/popover-wrapper";
-import "cucumber-web-components/dist/popover";
-import "cucumber-web-components/dist/divider";
+import "ccw/side-nav/index.js";
+import "ccw/side-nav-item/index.js";
+import "ccw/icon/index.js";
+import "ccw/form-layout/index.js";
+import "ccw/text-field/index.js";
+import "ccw/email-field/index.js";
+import "ccw/date-picker/index.js";
+import "ccw/option/index.js";
+import "ccw/select/index.js";
+import "ccw/textarea/index.js";
+import "ccw/checkbox/index.js";
+import "ccw/dialog/index.js";
+import "ccw/button/index.js";
+import "ccw/spinner/index.js";
+import "ccw/password-field/index.js";
+import "ccw/radio/index.js";
+import "ccw/radio-group/index.js";
+import "ccw/visually-hidden/index.js";
+import "ccw/horizontal-layout/index.js";
+import "ccw/badge/index.js";
+import "ccw/popover-wrapper/index.js";
+import "ccw/popover/index.js";
+import "ccw/divider/index.js";
 
-import "@spectrum-web-components/theme/sp-theme.js";
-import "@spectrum-web-components/theme/src/themes.js";
-import "@spectrum-web-components/textfield/sp-textfield.js";
-import "@spectrum-web-components/combobox/sp-combobox.js";
-import "@spectrum-web-components/button/sp-button.js";
-import "@spectrum-web-components/button/sp-clear-button.js";
-import "@spectrum-web-components/button/sp-close-button.js";
-import "@spectrum-web-components/field-group/sp-field-group.js";
-import "@spectrum-web-components/radio/sp-radio.js";
-import "@spectrum-web-components/radio/sp-radio-group.js";
-import "@spectrum-web-components/checkbox/sp-checkbox.js";
-import "@spectrum-web-components/divider/sp-divider.js";
-import "@spectrum-web-components/field-label/sp-field-label.js";
-import "@spectrum-web-components/top-nav/sp-top-nav.js";
-import "@spectrum-web-components/top-nav/sp-top-nav-item.js";
-import "@spectrum-web-components/menu/sp-menu.js";
-import "@spectrum-web-components/menu/sp-menu-group.js";
-import "@spectrum-web-components/menu/sp-menu-item.js";
-import "@spectrum-web-components/menu/sp-menu-divider.js";
-import "@spectrum-web-components/action-menu/sp-action-menu.js";
-import "@spectrum-web-components/search/sp-search.js";
+// import "@spectrum-web-components/theme/sp-theme.js";
+// import "@spectrum-web-components/theme/src/themes.js";
+// import "@spectrum-web-components/textfield/sp-textfield.js";
+// import "@spectrum-web-components/combobox/sp-combobox.js";
+// import "@spectrum-web-components/button/sp-button.js";
+// import "@spectrum-web-components/button/sp-clear-button.js";
+// import "@spectrum-web-components/button/sp-close-button.js";
+// import "@spectrum-web-components/field-group/sp-field-group.js";
+// import "@spectrum-web-components/radio/sp-radio.js";
+// import "@spectrum-web-components/radio/sp-radio-group.js";
+// import "@spectrum-web-components/checkbox/sp-checkbox.js";
+// import "@spectrum-web-components/divider/sp-divider.js";
+// import "@spectrum-web-components/field-label/sp-field-label.js";
+// import "@spectrum-web-components/top-nav/sp-top-nav.js";
+// import "@spectrum-web-components/top-nav/sp-top-nav-item.js";
+// import "@spectrum-web-components/menu/sp-menu.js";
+// import "@spectrum-web-components/menu/sp-menu-group.js";
+// import "@spectrum-web-components/menu/sp-menu-item.js";
+// import "@spectrum-web-components/menu/sp-menu-divider.js";
+// import "@spectrum-web-components/action-menu/sp-action-menu.js";
+// import "@spectrum-web-components/search/sp-search.js";
 
 import BreezeRouter from "breeze-router";
-import { render } from "./src/utils/index.js";
+import { render } from "utils/index.js";
 window.ROUTER = new BreezeRouter();
 
 (async () => {
-  const endpoint =
-    import.meta.env.MODE === "development"
-      ? "http://localhost/api/v1"
-      : "https://api.careertracker.work/api/v1";
+  const endpoint = ["127.0.0.1", "localhost"].includes(window.location.hostname)
+    ? "http://localhost/api/v1"
+    : "https://api.careertracker.work/api/v1";
   // What about adding config to router?
   window.config = { endpoint };
 
@@ -76,15 +75,15 @@ window.ROUTER = new BreezeRouter();
       return ROUTER.redirect("/jobs");
     }
 
-    render("./src/pages/index.js", outlet);
+    render("pages/index.js", outlet);
   });
 
   ROUTER.add("/signup", async ({ route, params }) => {
-    render("./src/pages/signup/index.js", outlet);
+    render("pages/signup/index.js", outlet);
   });
 
   ROUTER.add("/signin", async ({ route, params }) => {
-    render("./src/pages/signin/index.js", outlet);
+    render("pages/signin/index.js", outlet);
   });
 
   ROUTER.add("/login-via-email", async ({ route, params }) => {
@@ -136,18 +135,18 @@ window.ROUTER = new BreezeRouter();
   });
 
   ROUTER.add("/jobs/add", async ({ route, params }) => {
-    render("/src/pages/jobs/index.js", outlet);
+    render("pages/jobs/index.js", outlet);
   });
 
   ROUTER.add("/jobs", async ({ route, params }) => {
     if (ROUTER._previousRoute.path === route.path) {
       return outlet?.firstElementChild?.refresh();
     }
-    render("/src/pages/jobs/index.js", outlet);
+    render("pages/jobs/index.js", outlet);
   });
 
   ROUTER.add("/jobs/edit", async ({ route, params }) => {
-    render("/src/pages/jobs/edit.js", outlet);
+    render("pages/jobs/edit.js", outlet);
   });
 
   ROUTER.start();
