@@ -31,9 +31,6 @@
             </script>
   </head>
   <body>
-    <template id="spinner">
-      <cc-spinner style="--size: 2em"></cc-spinner>
-    </template>
     <template path="/jobs/edit" protected-route>
       <article>
         <div>
@@ -313,17 +310,15 @@
           </div>
         </article>
     </template>
-    <sp-theme theme="spectrum" color="light" scale="large">
-      <div class="container">
-        <cc-header></cc-header>
-        <main id="app"></main>
-        <footer>
-          Crafted by <a href="https://github.com/heybran">@heybran</a>
-          Logo icon is downloaded from <a href="https://icons8.com/">Icons8</a>
-        </footer>
-        <div role="region" aria-live="polite" aria-atomic="true"></div>
-      </div>
-    </sp-theme>
-    <script type="module" src="/main.js"></script>
+    <div class="container">
+      <cc-header></cc-header>
+      <main id="app"></main>
+      <footer>
+        Crafted by <a href="https://github.com/heybran">@heybran</a>
+        Logo icon is downloaded from <a href="https://icons8.com/">Icons8</a>
+      </footer>
+      <div role="region" aria-live="polite" aria-atomic="true"></div>
+    </div>
+    <script type="module" src="main.js"></script>
   </body>
 </html>

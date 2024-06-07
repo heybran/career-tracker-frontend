@@ -3,16 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
+  "scripts": {},
   "author": "Brandon Zhang",
   "license": "MIT",
-  "devDependencies": {
-    "vite": "^5.2.9"
-  },
   "dependencies": {
     "@spectrum-web-components/action-button": "^0.42.2",
     "@spectrum-web-components/action-menu": "^0.42.2",

@@ -86,9 +86,8 @@ export default class JobsList extends UtilsMixin(HTMLElement) {
       </article>
       <cc-dialog label="Delete Job" id="delete-job-dialog">
       </cc-dialog>
-        </div>
-          
-          `;
+      </div>
+    `;
   }
 
   renderTable = (jobs, container) => {
@@ -118,16 +117,7 @@ export default class JobsList extends UtilsMixin(HTMLElement) {
               : '<cc-badge theme="neutral">No</cc-badge>'
           }</td>
           <td>${job.notes}</td>
-          <td>
-            <sp-action-menu label="Actions" placement="bottom-end" style="margin-inline-start: auto;" quiet>
-                <sp-menu-item href="/jobs/edit?id=${job.id}">Edit</sp-menu-item>
-                <sp-menu-item onclick="this.closest('${
-                  this.localName
-                }').showDeleteDialog('${job.id}', '${
-        job.website
-      }')">Delete</sp-menu-item>
-            </sp-action-menu>
-            <!--
+          <td>            
             <cc-popover-wrapper>
               <cc-button theme="borderless round" slot="trigger">
                 <cc-icon icon="three-dots"></cc-icon>
@@ -149,8 +139,7 @@ export default class JobsList extends UtilsMixin(HTMLElement) {
                   </cc-button>
                 </div>
               </cc-popover>
-            </cc-popover-wrapper>  
-            -->   
+            </cc-popover-wrapper>   
           </td>
         </tr>
       `;
@@ -172,8 +161,8 @@ export default class JobsList extends UtilsMixin(HTMLElement) {
     const dialog = document.querySelector("#delete-job-dialog");
     dialog.innerHTML = `
       <p>Are you sure you want to delete job from <b>${website}?</b></p>
-      <sp-button size="m" variant="secondary" onclick="this.parentElement.close();" slot="footer-actions-left">Cancel</sp-button>
-      <sp-button size="m" onclick="this.closest('${this.localName}').deleteJob('${id}', this);" slot="footer-actions-right">Confirm</sp-button>
+      <cc-button theme="secondary" onclick="this.parentElement.close();" slot="footer-actions-left">Cancel</cc-button>
+      <cc-button theme="primary" onclick="this.closest('${this.localName}').deleteJob('${id}', this);" slot="footer-actions-right">Confirm</cc-button>
     `;
     dialog.show();
   };

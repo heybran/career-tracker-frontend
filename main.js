@@ -23,27 +23,6 @@ import "ccw/popover/index.js";
 import "ccw/divider/index.js";
 import "ccw/search-field/index.js";
 
-// import "@spectrum-web-components/theme/sp-theme.js";
-// import "@spectrum-web-components/theme/src/themes.js";
-// import "@spectrum-web-components/textfield/sp-textfield.js";
-// import "@spectrum-web-components/combobox/sp-combobox.js";
-// import "@spectrum-web-components/button/sp-button.js";
-// import "@spectrum-web-components/button/sp-clear-button.js";
-// import "@spectrum-web-components/button/sp-close-button.js";
-// import "@spectrum-web-components/field-group/sp-field-group.js";
-// import "@spectrum-web-components/radio/sp-radio.js";
-// import "@spectrum-web-components/radio/sp-radio-group.js";
-// import "@spectrum-web-components/checkbox/sp-checkbox.js";
-// import "@spectrum-web-components/divider/sp-divider.js";
-// import "@spectrum-web-components/field-label/sp-field-label.js";
-// import "@spectrum-web-components/top-nav/sp-top-nav.js";
-// import "@spectrum-web-components/top-nav/sp-top-nav-item.js";
-// import "@spectrum-web-components/menu/sp-menu.js";
-// import "@spectrum-web-components/menu/sp-menu-group.js";
-// import "@spectrum-web-components/menu/sp-menu-item.js";
-// import "@spectrum-web-components/menu/sp-menu-divider.js";
-// import "@spectrum-web-components/action-menu/sp-action-menu.js";
-
 import BreezeRouter from "breeze-router";
 import { render } from "utils/index.js";
 window.ROUTER = new BreezeRouter();
@@ -135,6 +114,7 @@ window.ROUTER = new BreezeRouter();
   });
 
   ROUTER.add("/jobs/add", async ({ route, params }) => {
+    console.log(1);
     render("pages/jobs/add.js", outlet);
   });
 

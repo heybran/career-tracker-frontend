@@ -1,4 +1,4 @@
-import { UtilsMixin, toast } from "../../utils";
+import { UtilsMixin, toast } from "utils/index.js";
 
 export default class EditJob extends UtilsMixin(HTMLElement) {
   static tagName = "edit-job";
@@ -72,6 +72,7 @@ export default class EditJob extends UtilsMixin(HTMLElement) {
       });
       job = await res.json();
     }
+    console.log(job);
     this.innerHTML = `
     <div class="content" part="content">
         <div><h1>Edit job</h1>
@@ -81,68 +82,58 @@ export default class EditJob extends UtilsMixin(HTMLElement) {
           this.localName
         }').updateJob(event)">
             <cc-form-layout>
-            <div>
-                <sp-field-label for="website">Website</sp-field-label>
-                <sp-textfield id="website" required name="website" value="${
-                  job.website
-                }"></sp-textfield>
-            </div>
-            <div>
-                <sp-field-label for="position">Position</sp-field-label>
-                <sp-textfield id="position" required name="position" value="${
-                  job.position
-                }"></sp-textfield>
-            </div>
-            <div>
-                <sp-field-label for="source">Source</sp-field-label>
-                <sp-textfield id="source" name="source" value="${
-                  job.source
-                }"></sp-textfield>
-            </div>
-            <div>
-                <sp-field-label for="date_applied">Date Applied</sp-field-label>
-                <sp-textfield id="date_applied" name="date_applied" value="${
-                  job.date_applied
-                }"></sp-textfield>
-            </div>
-            <div>
-                <sp-field-label for="status">Status</sp-field-label>
-                <sp-combobox id="status" name="status" value="${job.status}">
-                <sp-menu-item value="pending">Pending</sp-menu-item>
-                <sp-menu-item value="rejected">Rejected</sp-menu-item>
-                <sp-menu-item value="not-applied" checked>Not applied</sp-menu-item>
-                </sp-combobox>
-            </div>
-            <div>
-                <sp-field-label for="apply_channel">Apply Channel</sp-field-label>
-                <sp-combobox id="apply_channel" name="apply_channel" value="${
-                  job.apply_channel
-                }">
-                <sp-menu-item value="job_application_form">Jon Application Form</sp-menu-item>
-                <sp-menu-item value="email">Email</sp-menu-item>
-                <sp-menu-item value="linkedin">LinkedIn</sp-menu-item>
-                </sp-combobox>
-            </div>
-            <div colspan="2">
-                <sp-field-label for="notes">Notes</sp-field-label>
+              <cc-text-field required name="website" label="Website" value="${
+                job.website
+              }"></cc-text-field>
+              <cc-text-field label="Position" required name="position" value="${
+                job.position
+              }"></cc-text-field>
+              <cc-text-field label="Source" name="source" value="${
+                job.source
+              }"></cc-text-field>
+              <cc-date-picker label="Date applied" name="date_applied" value="${
+                job.date_applied
+              }"></cc-date-picker>
+            
+              <cc-select name="status" label="Status">
+                <cc-option value="pending" ${this.selected(
+                  job.status === "pending"
+                )}>Pending</cc-option>
+                <cc-option value="rejected" ${this.selected(
+                  job.status === "rejected"
+                )}>Rejected</cc-option>
+                <cc-option value="not-applied" ${this.selected(
+                  job.status === "not-applied"
+                )}>Not applied</cc-option>
+              </cc-select>
+
+              <cc-select name="apply_channel" label="Apply channel">
+                <cc-option value="job_application_form">Jon Application Form</cc-option>
+                <cc-option value="email">Email</cc-option>
+                <cc-option value="linkedin">LinkedIn</cc-option>
+              </cc-select>
+
+              <div colspan="2">
+                <p for="notes">Notes</p>
                 <input id="notes" type="hidden" name="notes" value="${
                   job.notes
                 }">
                 <trix-editor input="notes" class="trix-content"></trix-editor>
-            </div>
+              </div>
             </cc-form-layout>
+
             <cc-horizontal-layout>
-                <sp-checkbox name="freelance" ${this.checked(
-                  Number(job.freelance)
-                )}>Freelance</sp-checkbox>
-                <sp-checkbox name="volunteer_position" ${this.checked(
-                  Number(job.volunteer_position)
-                )}>Volunteer Position</sp-checkbox>
-                <sp-checkbox name="four_day_week" ${this.checked(
-                  Number(job.four_day_week)
-                )}>4 Day Week</sp-checkbox>
+              <cc-checkbox name="freelance" ${this.checked(
+                Number(job.freelance)
+              )}>Freelance</cc-checkbox>
+              <cc-checkbox name="volunteer_position" ${this.checked(
+                Number(job.volunteer_position)
+              )}>Volunteer Position</cc-checkbox>
+              <cc-checkbox name="four_day_week" ${this.checked(
+                Number(job.four_day_week)
+              )}>4 Day Week</cc-checkbox>
             </cc-horizontal-layout>
-            <sp-button size="m" type="submit">Submit</sp-button>
+            <cc-button type="submit" theme="primary">Submit</cc-button>
         </form>
     </div>`;
   }
