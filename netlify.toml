@@ -2,3 +2,13 @@
   from = "/*"
   to = '/index.html'
   status = 200
+
+[[redirects]]
+  from = "/src/*"
+  to = '/src/:splat'
+  status = 200
+
+[[redirects]]
+  from = "/node_modules/*"
+  to = '/node_modules/:splat'
+  status = 200

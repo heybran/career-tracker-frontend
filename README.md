@@ -1,7 +1,5 @@
-# Jobs Tracker 
+# Career Tracker 
 
-A jobs tracker application built with vanilla `Web Components` as frontend and `WordPress` & `PHP` as backend.
+A jobs tracker application built with vanilla `Web Components` as frontend and `WordPress` & `PHP` as backend. This repo is for frontend codebase.
 
-## Generate SSL certificates locally
-- mkcert -key-file key.pem -cert-file cert.pem localhost
-- openssl req -x509 -nodes -newkey rsa:2048 -keyout key.pem -out cert.pem -days 365
+Project starts with using Vite to bundle site files, but then got converted to using `importmap` without any build steps. Well, technically when deploy to Netlify, Netlify does an automatic `npm install` to install Cucumber Web Components into `node_modules` folder, and then these components are imported via importmap.
