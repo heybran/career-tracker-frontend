@@ -7,8 +7,3 @@
   from = "/src/*"
   to = '/src/:splat'
   status = 200
-
-[[redirects]]
-  from = "/modules/*"
-  to = '/modules/:splat'
-  status = 200
