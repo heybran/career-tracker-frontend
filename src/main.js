@@ -42,7 +42,7 @@ window.ROUTER = new BreezeRouter();
     const { logged_in, user } = await res.json();
     if (logged_in) {
       window.config.user = user;
-      import("./src/components/header.js");
+      import("/src/components/header.js");
     }
   }
 
