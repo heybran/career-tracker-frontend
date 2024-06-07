@@ -9,6 +9,6 @@
   status = 200
 
 [[redirects]]
-  from = "/node_modules/*"
-  to = '/node_modules/:splat'
+  from = "/modules/*"
+  to = '/modules/:splat'
   status = 200
