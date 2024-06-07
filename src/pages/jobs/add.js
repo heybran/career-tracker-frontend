@@ -54,54 +54,35 @@ export default class AddJob extends HTMLElement {
         </div>
         <form method="post" onsubmit="this.closest('${this.constructor.tagName}').addJob(event)">
           <cc-form-layout>
-            <div>
-              <sp-field-label for="website">Website</sp-field-label>
-              <sp-textfield id="website" required name="website"></sp-textfield>
-            </div>
-            <div>
-              <sp-field-label for="position">Position</sp-field-label>
-              <sp-textfield id="position" required name="position"></sp-textfield>
-            </div>
-            <div>
-              <sp-field-label for="source">Source</sp-field-label>
-              <sp-textfield id="source" name="source"></sp-textfield>
-            </div>
-            <div>
-              <sp-field-label for="date_applied">Apply Date</sp-field-label>
-              <sp-textfield id="date_applied" name="date_applied"></sp-textfield>
-            </div>
-            <div>
-              <sp-field-label for="status">Status</sp-field-label>
-              <sp-combobox id="status" name="status">
-                <sp-menu-item value="pending">Pending</sp-menu-item>
-                <sp-menu-item value="rejected">Rejected</sp-menu-item>
-                <sp-menu-item value="not-applied" checked>Not applied</sp-menu-item>
-              </sp-combobox>
-            </div>
-            <div>
-              <sp-field-label for="apply_channel">Apply Channel</sp-field-label>
-              <sp-combobox id="apply_channel" name="apply_channel">
-                <sp-menu-item value="job_application_form">Jon Application Form</sp-menu-item>
-                <sp-menu-item value="email">Email</sp-menu-item>
-                <sp-menu-item value="linkedin">LinkedIn</sp-menu-item>
-              </sp-combobox>
-            </div>
+            <cc-text-field label="Website" required name="website"></cc-text-field>
+            <cc-text-field label="Position" required name="position"></cc-text-field>
+            <cc-text-field label="Source" name="source"></cc-text-field>
+            <cc-date-picker label="Apply date" name="date_applied"></cc-date-picker>
+            <cc-select name="status" label="Status">
+              <cc-option value="pending">Pending</cc-option>
+              <cc-option value="rejected">Rejected</cc-option>
+              <cc-option value="not-applied">Not applied</cc-option>
+            </cc-select>
+            <cc-select name="apply_channel" label="Apply channel">
+              <cc-option value="job_application_form">Jon Application Form</cc-option>
+              <cc-option value="email">Email</cc-option>
+              <cc-option value="linkedin">LinkedIn</cc-option>
+            </cc-select>
             <div colspan="2">
-              <sp-field-label for="notes">Notes</sp-field-label>
+              <p for="notes">Notes</p>
               <input id="notes" type="hidden" name="notes">
               <trix-editor input="notes" class="trix-content"></trix-editor>
             </div>
           </cc-form-layout>
-            <cc-horizontal-layout>
-              <sp-checkbox name="freelance">Freelance</sp-checkbox>
-              <sp-checkbox name="volunteer_position">Volunteer Position</sp-checkbox>
-              <sp-checkbox name="four_day_week">4 Day Week</sp-checkbox>
-            </cc-horizontal-layout>
-            <sp-button size="m" type="submit">Submit</sp-button>
+          <cc-horizontal-layout>
+            <cc-checkbox name="freelance">Freelance</cc-checkbox>
+            <cc-checkbox name="volunteer_position">Volunteer Position</cc-checkbox>
+            <cc-checkbox name="four_day_week">4 Day Week</cc-checkbox>
+          </cc-horizontal-layout>
+          <cc-button type="submit" theme="primary">Submit</cc-button>
         </form>
       </div>
-        
-        `;
+    `;
   }
 }
 

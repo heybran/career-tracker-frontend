@@ -42,6 +42,11 @@ export function UtilsMixin(BaseElement) {
       return !!value ? "checked" : "";
     }
 
+    selected(value) {
+      console.log(value);
+      return `aria-selected=${!!value}`;
+    }
+
     /**
      * Find the label element for an form field element.
      * @param {HTMLElement} element
