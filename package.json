@@ -7,23 +7,7 @@
   "author": "Brandon Zhang",
   "license": "MIT",
   "dependencies": {
-    "@spectrum-web-components/action-button": "^0.42.2",
-    "@spectrum-web-components/action-menu": "^0.42.2",
-    "@spectrum-web-components/button": "^0.42.2",
-    "@spectrum-web-components/checkbox": "^0.42.2",
-    "@spectrum-web-components/combobox": "^0.42.2",
-    "@spectrum-web-components/divider": "^0.42.2",
-    "@spectrum-web-components/field-group": "^0.42.2",
-    "@spectrum-web-components/field-label": "^0.42.2",
-    "@spectrum-web-components/menu": "^0.42.2",
-    "@spectrum-web-components/radio": "^0.42.2",
-    "@spectrum-web-components/search": "^0.42.2",
-    "@spectrum-web-components/textfield": "^0.42.2",
-    "@spectrum-web-components/theme": "^0.42.2",
-    "@spectrum-web-components/toast": "^0.42.2",
-    "@spectrum-web-components/top-nav": "^0.42.2",
     "breeze-router": "^0.2.1",
-    "cucumber-web-components": "^0.4.0",
-    "trix": "^2.1.0"
+    "cucumber-web-components": "^0.5.1"
   }
 }
