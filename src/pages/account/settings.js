@@ -1,38 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather+Sans:300,500,regular,|Poppins:700,regular,|Poppins:100,200,300,400,500,600,700,800,900">
-    <title>Jobs Tracker</title>
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
-    <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
-    <link rel="stylesheet" href="/src/style.css">
-    <style>
-      cc-spinner {
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-      }
-    </style>
-    <script type="importmap">
-      {
-        "imports": {
-          "breeze-router": "https://unpkg.com/breeze-router@0.2.1/dist/BreezeRouter.min.js",
-          "utils/": "/src/utils/",
-          "pages/": "/src/pages/",
-          "ccw/": "https://unpkg.com/cucumber-web-components@0.5.2/dist/"
-        }
-      }
-    </script>
-  </head>
-  <body>
-    <template path="/account/setting" protected-route>
-      <article class="narrow-content">
+import { UtilsMixin } from "utils/index.js";
+
+export default class Settings extends UtilsMixin(HTMLElement) {
+    static tagName = "account-settings";
+    connectedCallback() {
+        this.setHTMLUnsafe(`
+        <article class="narrow-content">
         <div>
           <h1>Account setting</h1>
           <p>Manage your account settings</p>
@@ -91,7 +63,13 @@
               <h2 class="form-heading">Display name</h2>
               <p><small>Update display name to change what's been shown on top right corner.</small></p>
             </label>
-            <input slot="input" type="text" name="displayName" id="displayName">
+            <input 
+                slot="input" 
+                type="text" 
+                name="displayName" 
+                id="displayName"
+                value="${window.config.user.displayName || ''}"
+            >
           </copycat-text-field>
           <copycat-button theme="primary" style="margin-top: 0.5rem;">
             <template shadowrootmode="open">
@@ -209,7 +187,8 @@
             role="switch" 
             name="allow_password_login"  
             id="allow_password_login"
-            onchange="window.user.allowPasswordLogin(event);"
+            ${this.checked(window.config.user.allowPasswordLogin)}
+            onchange="this.closest('${this.localName}').allowPasswordLogin(event);"
           >
           <label slot="label" for="allow_password_login">
             <h2 class="form-heading">Allow password login</h2>
@@ -268,42 +247,25 @@
           </copycat-button>
         </form> -->
       </article>
-    </template>
-    <template path="/activate-account" protected-route>
-      <main>
-        <article class="narrow-content">
-          <div>
-            <h1>Activate your account</h1>
-          </div>
-        </article>
-      </main>
-    </template>
-    <template path="/account/reset-password" protected-route>
-      <main>
-        <article class="narrow-content">
-          <div>
-            <h1>Activate your account...</h1>
-            <cc-spinner></cc-spinner>
-          </div>
-        </article>
-      </main>
-    </template>
-    <template path="/login-via-email" protected-route>
-        <article class="narrow-content">
-          <div>
-            <h1>Login in your account</h1>
-          </div>
-        </article>
-    </template>
-    <div class="container">
-      <cc-header></cc-header>
-      <main id="app"></main>
-      <footer>
-        Crafted by <a href="https://github.com/heybran">@heybran</a>
-        Logo icon is downloaded from <a href="https://icons8.com/">Icons8</a>
-      </footer>
-      <div role="region" aria-live="polite" aria-atomic="true"></div>
-    </div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
-</html>
+    `);
+    }
+
+  /**
+   * Allow password login on top original email login.
+   * @param {Event} event 
+   */
+  allowPasswordLogin(event) {
+    fetch(`${window.config.endpoint}` + '/users/allow-password-login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ allowed: event.target.checked }),
+      credentials: 'include'
+    }).then((res) => res.json()).then(data => {
+      window.config.user.allowPasswordLogin = event.target.checked;
+    });
+  }
+}
+
+customElements.define(Settings.tagName, Settings);

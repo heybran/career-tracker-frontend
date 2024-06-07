@@ -115,23 +115,6 @@ export default class User {
    * Allow password login on top origin email login.
    * @param {Event} event 
    */
-  allowPasswordLogin(event) {
-    fetch(`${window.config.endpoint}` + '/users/allow-password-login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ allowed: event.target.checked }),
-      credentials: 'include'
-    }).then((res) => res.json()).then(data => {
-      window.config.user.allowPasswordLogin = event.target.checked;
-    });
-  }
-
-  /**
-   * Allow password login on top origin email login.
-   * @param {Event} event 
-   */
   updateDisplayName(event) {
     event.preventDefault();
     const formData = new FormData(event.target);

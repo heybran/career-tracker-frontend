@@ -6,7 +6,6 @@ export default class Header extends HTMLElement {
 
   connectedCallback() {
     this.render();
-    document.body.classList.add("hidrated");
   }
 
   render() {
@@ -126,13 +125,13 @@ export default class Header extends HTMLElement {
             ? `
           <cc-popover-wrapper>
             <cc-button slot="trigger">
-              ${window.config.user.email}
+              ${window.config.user?.displayName || window.config.user.email}
               <cc-icon icon="chevron-down" slot="suffix"></cc-icon>
             </cc-button>
             <cc-popover placement="bottom-end">
               <ul>
                 <li>
-                  <cc-button style="width: 100%" href="/account/change-password">Update password</cc-button>
+                  <cc-button style="width: 100%" href="/account/settings">Settings</cc-button>
                 </li>
                 <li>
                   <cc-button style="width: 100%" onclick="this.getRootNode().host.signout();">Sign out</cc-button>

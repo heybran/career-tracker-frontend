@@ -107,8 +107,10 @@ export default class Signin extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <h1>
-        <img src="/public/career-tracker.svg" alt="Career Tracker Logo" class="logo">
-        <cc-visually-hidden>Career Tracker</cc-visually-hidden>
+        <a href="/">
+          <img src="/public/career-tracker.svg" alt="Career Tracker Logo" class="logo">
+          <cc-visually-hidden>Career Tracker</cc-visually-hidden>
+        </a>
       </h1>
       <div class="form-wrapper">
         <form method="post" onsubmit="this.closest('${this.localName}').signin(event);">
@@ -119,8 +121,8 @@ export default class Signin extends HTMLElement {
         <cc-divider text="Or"></cc-divider>
         <form method="post" onsubmit="this.closest('${this.localName}').signinWithPassword(event);">
           <p>Signin with email and password</p>
-          <cc-email-field label="Email address" name="email" required></cc-email-field>
-          <cc-password-field label="Password" name="password" required></cc-password-field>
+          <cc-email-field label="Email address" name="email" required value="${new URLSearchParams(location.search).get("email") || ''}"></cc-email-field>
+          <cc-password-field label="Password" name="password" required value="${new URLSearchParams(location.search).get("password") || ''}"></cc-password-field>
           <cc-button type="submit" theme="primary" style="margin-top: 0.5rem;">Submit</cc-button>
         </form>
         <small><p>Do not have an account? <a href="/signup">Sign up here</a>.</p></small>
@@ -130,3 +132,9 @@ export default class Signin extends HTMLElement {
 }
 
 customElements.define(Signin.tagName, Signin);
+
+customElements.whenDefined(Signin.tagName).then(() => {
+  toast.success('Still working on demo feature.', {
+    persist: true,
+  });
+});

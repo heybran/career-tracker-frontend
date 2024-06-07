@@ -14,6 +14,7 @@ export default class HomePage extends UtilsMixin(HTMLElement) {
             home-page p {
                 max-width: 60ch;
                 margin-inline: auto;
+                text-align: center;
             }
         </style>
         <div class="content" part="content">
@@ -23,7 +24,9 @@ export default class HomePage extends UtilsMixin(HTMLElement) {
             </h1>
         <p>A tiny web app that helps you track the jobs you applied, built with vanilla JavaScript & Web Components on frontend and WordPress & PHP as backend.</p>
         <cc-horizontal-layout style="justify-content: center;">
-            <cc-button href="/signup" theme="primary" style="width: 20rem;">Get started</cc-button>
+            <cc-button href="/signup" theme="primary">Sign up</cc-button>
+            <cc-button href="/signin" theme="neutral">Sign in</cc-button>
+            <cc-button href="/signin?demo=1" theme="success">Demo</cc-button>
         </cc-horizontal-layout>
         </div>
     `;

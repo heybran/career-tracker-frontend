@@ -129,5 +129,9 @@ window.ROUTER = new BreezeRouter();
     render("pages/jobs/edit.js", outlet);
   });
 
+  ROUTER.add("/account/settings", async ({ route, params}) => {
+    render("pages/account/settings.js", outlet);
+  });
+
   ROUTER.start();
 })();
