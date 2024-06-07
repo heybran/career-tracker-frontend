@@ -42,7 +42,7 @@ build/Release
 node_modules/.vite/
 node_modules/.modulees.yaml
 node_modules/.package-lock.json
-modules/.package-lock.json
+**/**/.package-lock.json
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
