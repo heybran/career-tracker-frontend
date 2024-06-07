@@ -39,7 +39,9 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
+node_modules/.vite/
+node_modules/.modulees.yaml
+node_modules/.package-lock.json
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -131,5 +133,6 @@ build/
 *.pem
 .DS_Store
 pnpm-lock.yaml
+package-lock.json
 # Local Netlify folder
 .netlify
