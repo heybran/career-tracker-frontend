@@ -26,7 +26,7 @@ export default class HomePage extends UtilsMixin(HTMLElement) {
         <cc-horizontal-layout style="justify-content: center;">
             <cc-button href="/signup" theme="primary">Sign up</cc-button>
             <cc-button href="/signin" theme="neutral">Sign in</cc-button>
-            <cc-button href="/signin?demo=1" theme="success">Demo</cc-button>
+            <cc-button href="/signin?email=demo@careertracker.work&password=demo" theme="success">Demo</cc-button>
         </cc-horizontal-layout>
         </div>
     `;

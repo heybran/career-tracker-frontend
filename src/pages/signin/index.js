@@ -119,7 +119,7 @@ export default class Signin extends HTMLElement {
           <cc-button type="submit" theme="primary" style="margin-top: 0.5rem;">Submit</cc-button>
         </form>
         <cc-divider text="Or"></cc-divider>
-        <form method="post" onsubmit="this.closest('${this.localName}').signinWithPassword(event);">
+        <form method="post" onsubmit="this.closest('${this.localName}').signinWithPassword(event);" id="password-form">
           <p>Signin with email and password</p>
           <cc-email-field label="Email address" name="email" required value="${new URLSearchParams(location.search).get("email") || ''}"></cc-email-field>
           <cc-password-field label="Password" name="password" required value="${new URLSearchParams(location.search).get("password") || ''}"></cc-password-field>
@@ -128,13 +128,19 @@ export default class Signin extends HTMLElement {
         <small><p>Do not have an account? <a href="/signup">Sign up here</a>.</p></small>
       </div>
     `;
+    customElements.whenDefined(this.constructor.tagName).then(async () => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('email')) {
+        toast.success('Welcome aboard, signing you in...', {
+          persist: true,
+        });
+        setTimeout(() => {
+          this.querySelector('#password-form').dispatchEvent(new SubmitEvent('submit'));
+        }, 1000)
+      }
+    });
   }
+
 }
 
 customElements.define(Signin.tagName, Signin);
-
-customElements.whenDefined(Signin.tagName).then(() => {
-  toast.success('Still working on demo feature.', {
-    persist: true,
-  });
-});
