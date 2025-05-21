@@ -32,7 +32,7 @@ window.ROUTER = new BreezeRouter();
     ? "http://localhost/api/v1"
     : "https://api.careertracker.work/api/v1";
   // What about adding config to router?
-  window.config = { endpoint };
+  window.config = { endpoint: "https://api.heybran.cn/api/v1" };
 
   const res = await fetch(window.config.endpoint + "/users/is-logged-in", {
     credentials: "include",
